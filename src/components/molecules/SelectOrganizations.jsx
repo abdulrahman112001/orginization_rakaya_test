@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import useFetch from "../../hooks/useFetch.Js"
 import SelectComp from "./Formik/SelectComp"
 
 export default function SelectOrganizations({
   setStatus,
+  // eslint-disable-next-line react/prop-types
   updateData,
   resetForm,
   fieldKey,
