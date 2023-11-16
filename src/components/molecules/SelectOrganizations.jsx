@@ -1,27 +1,19 @@
 /* eslint-disable react/prop-types */
-import useFetch from "../../hooks/useFetch.Js"
+import useFetch from "../../hooks/useFetch"
 import SelectComp from "./Formik/SelectComp"
 
 export default function SelectOrganizations({
-  setStatus,
-  // eslint-disable-next-line react/prop-types
-  updateData,
-  resetForm,
-  fieldKey,
-  onChange,
-  placeholder,
+
   name,
   multi,
   label
 }) {
   const {
     data: organizations,
-    isLoading: organizationsLoading,
-    failureReason
   } = useFetch({
     endpoint: `organizations`,
     queryKey: ['organizations'],
-    onSuccess(data) {
+    onSuccess() {
     },
     onError(e) {
       console.log('e', e)
