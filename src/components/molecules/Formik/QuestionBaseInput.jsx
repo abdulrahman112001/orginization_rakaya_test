@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import PreviewImage from "../PreviewImage";
 import { MenuItem } from "react-pro-sidebar";
+import IconifyIcon from "../../atoms/icons/IconifyIcon";
 
 export default function QuestionBaseInput({
   label,
