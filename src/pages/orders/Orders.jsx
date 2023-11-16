@@ -9,9 +9,9 @@ import MainHeader from "../../components/atoms/MainHeader";
 import ModalComp from "../../components/atoms/ModalComp";
 import AddOrder from "../../components/organisms/orders/AddOrder";
 import DetailsOrder from "../../components/organisms/orders/DetailsOrder";
-import { useFetch } from "../../hooks";
 import Loading from "../../components/molecules/Loading";
 import DataNotFound from "../../components/molecules/NotFound";
+import useFetch from "../../hooks/useFetch";
 
 export default function Orders() {
   const [openAddFaculty, setOpenAddFaculty] = useState(false);
