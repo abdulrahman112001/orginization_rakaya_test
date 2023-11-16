@@ -11,11 +11,11 @@ import MainHeader from "../../../components/atoms/MainHeader";
 import OptionsMenu from "../../../components/organisms/Navbar/option-menu/OptionsMenu";
 import ModalComp from "../../../components/atoms/ModalComp";
 import AddEmployee from "../../../components/templates/myEmployee/AddEmployee";
-import { useFetch } from "../../../hooks";
 import DetailsFacility from "../../../components/organisms/MyFacilities/DetailsFacility";
 import StepperFacility from "../../../components/organisms/MyFacilities/StepperFacility";
 import Loading from "../../../components/molecules/Loading";
 import DataNotFound from "../../../components/molecules/NotFound";
+import useFetch from "../../../hooks/useFetch";
 
 export default function MyFacilities() {
   const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ export default function MyFacilities() {
   });
 
   const handleEdit = () => {
-    setShow(true); 
+    setShow(true);
   };
 
   return (
@@ -125,33 +125,32 @@ export default function MyFacilities() {
               </Grid>
             ))}
           </Grid>
-      
         </>
       ) : (
         <DataNotFound title={"لايوجد منشآت"} />
       )}
-          <ModalComp
-            open={open}
-            onClose={() => setOpen(false)}
-            Children={<DetailsFacility data={detailsItem} />}
+      <ModalComp
+        open={open}
+        onClose={() => setOpen(false)}
+        Children={<DetailsFacility data={detailsItem} />}
+      />
+      <ModalComp
+        open={openAddFaculty}
+        className={"  "}
+        onClose={() => setOpenAddFaculty(false)}
+        Children={<StepperFacility setOpenAddFaculty={setOpenAddFaculty} />}
+      />
+      <ModalComp
+        open={openAddEmployee}
+        className={"  "}
+        onClose={() => setOpenAddEmployee(false)}
+        Children={
+          <AddEmployee
+            facultyID={facultyID}
+            setOpenAddEmployee={setOpenAddEmployee}
           />
-          <ModalComp
-            open={openAddFaculty}
-            className={"  "}
-            onClose={() => setOpenAddFaculty(false)}
-            Children={<StepperFacility setOpenAddFaculty={setOpenAddFaculty} />}
-          />
-          <ModalComp
-            open={openAddEmployee}
-            className={"  "}
-            onClose={() => setOpenAddEmployee(false)}
-            Children={
-              <AddEmployee
-                facultyID={facultyID}
-                setOpenAddEmployee={setOpenAddEmployee}
-              />
-            }
-          />
+        }
+      />
     </div>
   );
 }
