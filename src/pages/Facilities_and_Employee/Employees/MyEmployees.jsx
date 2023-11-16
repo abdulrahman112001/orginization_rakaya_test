@@ -5,13 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import useFetch from "../../../hooks/useFetch.Js";
 import MainHeader from "../../../components/atoms/MainHeader";
 import OptionsMenu from "../../../components/organisms/Navbar/option-menu/OptionsMenu";
 import ModalComp from "../../../components/atoms/ModalComp";
 import DetailsEmployee from "../../../components/templates/myEmployee/DetailsEmployee";
 import Loading from "../../../components/molecules/Loading";
 import DataNotFound from "../../../components/molecules/NotFound";
+import useFetch from "../../../hooks/useFetch";
 
 export default function MyEmployees() {
   // eslint-disable-next-line no-unused-vars

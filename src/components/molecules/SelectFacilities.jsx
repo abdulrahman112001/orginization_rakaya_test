@@ -1,4 +1,4 @@
-import useFetch from "../../hooks/useFetch.Js"
+import useFetch from "../../hooks/useFetch"
 import SelectComp from "./Formik/SelectComp"
 
 export default function SelectFacilities({ name,  label }) {

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import useFetch from "../../hooks/useFetch.Js"
+import useFetch from "../../hooks/useFetch"
 import SelectComp from "./Formik/SelectComp"
 
 export default function OrganizationServices({ name,  label }) {
