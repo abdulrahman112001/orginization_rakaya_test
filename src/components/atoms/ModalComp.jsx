@@ -25,7 +25,7 @@ export default function ModalComp({ onClose, open, Children, className }) {
         aria-describedby='modal-modal-description'
         className={`max-w-[750px]   m-auto ${className}`}
       >
-        <Box sx={style} className="max-h-[80vh] overflow-y-scroll">{Children}</Box>
+        <Box sx={style} className="">{Children}</Box>
       </Modal>
     </div>
   )

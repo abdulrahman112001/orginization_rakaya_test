@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem'
 import IconButton from '@mui/material/IconButton'
 import { Link } from 'react-router-dom'
 import { useSettings } from '../../../../hooks/useSettings'
-import { Icon } from '@mui/material'
+import IconifyIcon from '../../../atoms/icons/IconifyIcon'
 
 // ** Icon Imports
 
@@ -64,7 +64,7 @@ const OptionsMenu = props => {
   return (
     <>
       <IconButton aria-haspopup='true' onClick={handleClick} {...iconButtonProps}>
-        {icon ? icon : <Icon icon='mdi:dots-vertical' {...iconProps} />}
+        {icon ? icon : <IconifyIcon icon='mdi:dots-vertical' {...iconProps} />}
       </IconButton>
       <Menu
         keepMounted

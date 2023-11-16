@@ -30,6 +30,7 @@ export default function MyFacilities() {
     data: facilities,
     isLoading,
     isRefetching,
+    refetch
   } = useFetch({
     endpoint: `facilities`,
     queryKey: ["facilities"],
@@ -96,19 +97,18 @@ export default function MyFacilities() {
                         flexDirection: "column",
                       }}
                     >
-                      <Avatar
+                      {/* <Avatar
                         src={"/images/icons/project-icons/social-label.png"}
                         sx={{ mb: 4, width: 100, height: 100 }}
+                      /> */}
+                      <img
+                        width="80"
+                        height="80"
+                        src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/external-company-town-xnimrodx-lineal-xnimrodx-4.png"
+                        alt="external-company-town-xnimrodx-lineal-xnimrodx-4"
                       />
-                      <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 500 , marginTop:1 }}>
                         {item?.name}
-                      </Typography>
-                      <Typography
-                        sx={{ mb: 4, color: "text.secondary" }}
-                        className="text-center"
-                      >
-                        {" "}
-                        {item?.source_registration}
                       </Typography>
                       <Button
                         variant="outlined"
@@ -147,6 +147,7 @@ export default function MyFacilities() {
         Children={
           <AddEmployee
             facultyID={facultyID}
+            refetch={refetch}
             setOpenAddEmployee={setOpenAddEmployee}
           />
         }

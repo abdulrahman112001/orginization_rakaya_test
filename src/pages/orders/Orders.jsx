@@ -97,29 +97,24 @@ export default function Orders() {
               </Grid>
             ))}
           </Grid>
-
-         
         </>
       ) : (
         <DataNotFound title={"لايوجد طلبات"} />
       )}
-       <ModalComp
-            open={openAddFaculty}
-            className={"  "}
-            onClose={() => setOpenAddFaculty(false)}
-            Children={<AddOrder setOpenAddFaculty={setOpenAddFaculty} />}
-          />
-          <ModalComp
-            open={openDetailsOrder}
-            className={"  "}
-            onClose={() => setOpenDetailsOrder(false)}
-            Children={
-              <DetailsOrder
-                data={detailsOrder}
-                setDetailsOrder={setDetailsOrder}
-              />
-            }
-          />
+      <ModalComp
+        open={openAddFaculty}
+        className={"  "}
+        onClose={() => setOpenAddFaculty(false)}
+        Children={<AddOrder setOpenAddFaculty={setOpenAddFaculty} />}
+      />
+      <ModalComp
+        open={openDetailsOrder}
+        className={"  "}
+        onClose={() => setOpenDetailsOrder(false)}
+        Children={
+          <DetailsOrder data={detailsOrder} setDetailsOrder={setDetailsOrder} />
+        }
+      />
     </div>
   );
 }

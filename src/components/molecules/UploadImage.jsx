@@ -24,13 +24,14 @@ const UploadImage = ({ name, label }) => {
 
   return (
     <>
-      <div className="relative my-4">
+      <div className="relative my-4 cursor-pointer">
         <Box
           {...getRootProps({ className: "dropzone" })}
+          cl
         >
           <label> {label} </label>
 
-          <input {...getInputProps()} />
+          <input {...getInputProps()} className="cursor-pointer" />
 
           <Box
             sx={{
@@ -43,7 +44,7 @@ const UploadImage = ({ name, label }) => {
               // value={files[0]?.name}
               fullWidth
               placeholder="الرجاء ارفاق صورة الهوية *"
-              className="bg-white rounded-[10px]"
+              className="bg-white rounded-[10px] cursor-pointer"
             />
           </Box>
           {/* {img} */}

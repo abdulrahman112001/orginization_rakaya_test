@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
@@ -7,16 +6,17 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
+import { useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import { Fragment, useState } from "react";
+import { useMutate } from "../../../hooks/useMutate";
+import { notify } from "../../../utils/toast";
+import ButtonComp from "../../atoms/buttons/ButtonComp";
 import StepperCustomDot from "../../theme/StepperCustomDot";
 import StepperWrapper from "../../theme/stepper";
 import AddFacility from "./AddFacility";
 import Signature from "./Signature";
 import StepTwo from "./add_facility/StepTwo";
-import { notify } from "../../../utils/toast";
-import { useQueryClient } from "@tanstack/react-query";
-import { useMutate } from "../../../hooks/useMutate";
 
 const steps = [
   {
@@ -44,7 +44,7 @@ const StepperFacility = ({ setOpenAddFaculty }) => {
   };
   const queryClient = useQueryClient();
 
-  const { mutate: addFacility } = useMutate({
+  const { mutate: addFacility , isLoading:loadingAddFacility } = useMutate({
     mutationKey: [`add_facilities`],
     endpoint: `facilities`,
     onSuccess: () => {
@@ -75,8 +75,8 @@ const StepperFacility = ({ setOpenAddFaculty }) => {
     employee_number: "",
     chefs_number: "",
     kitchen_space: "",
-    registration_number_photo: "",
-    national_address_photo: "",
+    // registration: "",
+    // national_address: "",
     signature: "",
     street_name: "",
     neighborhood: "",
@@ -122,23 +122,27 @@ const StepperFacility = ({ setOpenAddFaculty }) => {
           mt={5}
           className="!sticky !left-0 !bottom-2"
         >
-          <Button
+          <ButtonComp
             size="large"
             disabled={activeStep === 0}
             onClick={handleBack}
             variant="outlined"
-            className="!border !border-solid !rounded-md  "
+            
+            className="! w-auto "
           >
             السابق
-          </Button>
-          <Button
-            size="large"
-            onClick={handleNext}
-            className="!bg-[#787EFF] text-white !rounded-md "
+          </ButtonComp>
+          <ButtonComp
+            action={handleNext}
             type={activeStep === steps.length ? "submit" : "button"}
+            loading={loadingAddFacility}
+            className={"w-auto"}
+            variant="contained"
+
+
           >
             {activeStep === steps.length - 1 ? "حفظ ومتابعه" : "التالي"}
-          </Button>
+          </ButtonComp>
         </Grid>
       </div>
     );
@@ -173,9 +177,13 @@ const StepperFacility = ({ setOpenAddFaculty }) => {
         <CardContent>
           <Formik
             initialValues={initialValues}
-            onSubmit={(value) => {
-              console.log("value", value);
-              addFacility(value);
+            onSubmit={(values) => {
+              console.log("value", values);
+              addFacility({
+                ...values,
+                "attachments[registration]": values["registration"],
+                "attachments[national_address]": values["national_address"],
+              });
             }}
           >
             {() => <Form>{renderContent()}</Form>}

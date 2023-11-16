@@ -13,6 +13,8 @@ import IconifyIcon from "../../atoms/icons/IconifyIcon";
 import userAvarar from "../../../assets/avatars/1.png";
 import { useAuth } from "../../../context/auth-and-perm/AuthProvider";
 import { useUser } from "../../../context/user provider/UserContext";
+import { useMutate } from "../../../hooks/useMutate";
+import { notify } from "../../../utils/toast";
 
 // ** Icon Imports
 
@@ -44,6 +46,7 @@ const UserDropdown = (props) => {
     }
     setAnchorEl(null);
   };
+  const { userData } = useUser();
 
   const styles = {
     py: 2,
@@ -59,13 +62,23 @@ const UserDropdown = (props) => {
       color: "text.primary",
     },
   };
+  const { mutate: LogOut } = useMutate({
+    mutationKey: [`Log_out`],
+    endpoint: `logout`,
+    onSuccess: () => {
+      notify("success", `good luck ${userData?.data?.name} `);
+    },
+    onError: (err) => {
+      console.log("err", err);
+      notify("error", err?.response?.data.message);
+    },
+  });
 
   const handleLogout = () => {
     handleDropdownClose();
     logout();
+    LogOut();
   };
-  const { userData } = useUser();
-
 
   return (
     <Fragment>

@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Form, Formik } from "formik";
 import { t } from "i18next";
@@ -9,22 +9,20 @@ import CheckCode from "../organisms/checkCode";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-and-perm/AuthProvider";
 import { useMutate } from "../../hooks/useMutate";
+import ButtonComp from "../atoms/buttons/ButtonComp";
 
 export default function LoginForm() {
   const [rememberMe, setRememberMe] = useState(true);
   const [verifyPhone, setVerifyPhone] = useState(false);
   const [valuesForm, setValuesForm] = useState("");
-  const { login } = useAuth()
+  const { login } = useAuth();
   const [dataValue, setDataValue] = useState();
-  const {
-    mutate: LoginData,
-
-  } = useMutate({
+  const { mutate: LoginData , isLoading:loadingLogin } = useMutate({
     mutationKey: [`login_data`],
     formData: true,
     endpoint: `login`,
     onSuccess: (data) => {
-      login(data.data)
+      login(data.data);
       notify("success");
     },
 
@@ -34,10 +32,7 @@ export default function LoginForm() {
     },
   });
 
-  const {
-    mutate: sendOTP,
-
-  } = useMutate({
+  const { mutate: sendOTP } = useMutate({
     mutationKey: [`send-otp`],
     endpoint: `send-otp`,
     onSuccess: (data) => {
@@ -59,8 +54,12 @@ export default function LoginForm() {
           setValuesForm(values);
 
           !verifyPhone
-            ? sendOTP(values)
-            : LoginData({ ...values, otp: dataValue?.value });
+            ? sendOTP({ ...values, organization_id: "1" })
+            : LoginData({
+                ...values,
+                otp: dataValue?.value,
+                organization_id: "1",
+              });
         }}
         initialValues={{ phone: "", phone_code: "", otp: "" }}
       >
@@ -101,16 +100,7 @@ export default function LoginForm() {
             <CheckCode number={dataValue?.value} valuesForm={valuesForm} />
           )}
 
-          <Button
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-            sx={{ mb: 7 }}
-            className="!bg-containColor"
-          >
-            {t("LOGIN")}
-          </Button>
+          <ButtonComp loading={loadingLogin}>{t("LOGIN")}</ButtonComp>
         </Form>
       </Formik>
     </div>

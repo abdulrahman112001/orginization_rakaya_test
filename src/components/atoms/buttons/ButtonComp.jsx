@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import Spinner from "../Spinner";
 
 const ButtonComp = ({
-  variant,
+  variant = "contained" || "outlined",
   children,
   className,
   disabled,
@@ -20,7 +20,13 @@ const ButtonComp = ({
       size="large"
       type={type}
       variant={variant}
-      className="text-white bg-contained hover:!bg-contained"
+      className={`${className} ${
+        variant == "contained"
+          ? "bg-contained"
+          : variant == "outlined"
+          ? "bg-transparent text-contained hover:!bg-transparent"
+          : ""
+      } text-white  hover:!bg-contained`}
       sx={{ mb: 7 }}
       disabled={disabled}
       onClick={action}

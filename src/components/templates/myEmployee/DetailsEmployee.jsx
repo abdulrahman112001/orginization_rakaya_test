@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import MainHeader from '../../atoms/MainHeader'
 
 export default function DetailsEmployee({ data }) {
@@ -15,6 +16,14 @@ export default function DetailsEmployee({ data }) {
         <div className='flex gap-2'>
           <p className='text-[#787EFF] font-bold'>المسمى الوظيفي:</p>
           <p>{data.position}</p>
+        </div>
+        <div className='flex gap-2'>
+          <p className='text-[#787EFF] font-bold'> صورة بطاقة العمل:</p>
+          <p><img src={data?.work_card_photo_url} alt="" /></p>
+        </div>
+        <div className='flex gap-2'>
+          <p className='text-[#787EFF] font-bold'>   صورة البطاقة الصحية:</p>
+          <p><img src={data?.health_card_photo_url} alt="" /></p>
         </div>
       </div>
     </div>
