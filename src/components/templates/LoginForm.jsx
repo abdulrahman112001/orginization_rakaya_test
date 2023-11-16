@@ -17,13 +17,13 @@ export default function LoginForm() {
   const [valuesForm, setValuesForm] = useState("");
   const { login } = useAuth();
   const [dataValue, setDataValue] = useState();
-  const { mutate: LoginData , isLoading:loadingLogin } = useMutate({
+  const { mutate: LoginData, isLoading: loadingLogin } = useMutate({
     mutationKey: [`login_data`],
     formData: true,
     endpoint: `login`,
     onSuccess: (data) => {
       login(data.data);
-      notify("success");
+      notify("success", `مربحا بك يا ${data?.data?.user.name}`);
     },
 
     onError: (err) => {

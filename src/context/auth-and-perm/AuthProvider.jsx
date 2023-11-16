@@ -1,13 +1,7 @@
 /* eslint-disable react/prop-types */
 import Cookies from "js-cookie";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-} from "react";
+import { createContext, useCallback, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { notify } from "../../utils/toast";
 import { UseLocalStorage } from "../../hooks/useLocalStorage";
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
@@ -19,10 +13,9 @@ export const AuthProvider = ({ children }) => {
       window.localStorage.setItem("user", JSON.stringify(data.user));
       Cookies.set("role", data.user.role_name);
       Cookies.set("token", data.token);
-      notify("success", "مرحبا بك");
       navigate("/", { replace: true });
     },
-    [navigate , setUser]
+    [navigate, setUser]
   );
 
   const logout = useCallback(async () => {
@@ -30,7 +23,6 @@ export const AuthProvider = ({ children }) => {
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("token");
     Cookies.remove("role");
-    notify("success", "Visit Us Again");
     navigate("/login", { replace: true });
   }, [setUser, navigate]);
 

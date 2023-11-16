@@ -25,6 +25,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <LoadingContextProvider> */}
     <LanguageContextProvider>
       <BrowserRouter>
+      <UserProvider>
+
         <AuthProvider>
           <SettingsProvider>
             <SettingsConsumer>
@@ -32,13 +34,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 return (
                   <ThemeComponent settings={settings}>
                     <HelmetProvider>
-                      <UserProvider>
                         <ProSidebarProvider>
                           <Suspense fallback={<Loading />}>
                             <App />
                           </Suspense>
                         </ProSidebarProvider>
-                      </UserProvider>
                     </HelmetProvider>
                   </ThemeComponent>
                 );
@@ -46,6 +46,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             </SettingsConsumer>
           </SettingsProvider>
         </AuthProvider>
+        </UserProvider>
+
       </BrowserRouter>
     </LanguageContextProvider>
     {/* </LoadingContextProvider> */}

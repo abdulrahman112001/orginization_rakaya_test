@@ -1,7 +1,6 @@
 // UserContext.js
 import Cookies from "js-cookie";
-import { useEffect } from "react";
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const UserContext = createContext();
 
