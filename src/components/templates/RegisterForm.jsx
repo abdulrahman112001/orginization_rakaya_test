@@ -8,7 +8,6 @@ import { styled } from "@mui/material/styles";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-and-perm/AuthProvider";
-import { useMutate } from "../../hooks/useMutate";
 import { notify } from "../../utils/toast";
 import IconifyIcon from "../atoms/icons/IconifyIcon";
 import BaseInputField from "../molecules/Formik/BaseInputField";
@@ -17,6 +16,7 @@ import MainButton from "../molecules/Formik/MainButton";
 import PhoneInput2 from "../molecules/Formik/PhoneInput2";
 import SelectCountry from "../molecules/SelectCountry";
 import UploadImage from "../molecules/UploadImage";
+import { useMutate } from "../../hooks/useMutate";
 
 export default function RegisterForm() {
   const LinkStyled = styled(Link)(({ theme }) => ({

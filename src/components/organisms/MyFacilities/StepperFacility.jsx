@@ -14,9 +14,9 @@ import StepperWrapper from "../../theme/stepper";
 import AddFacility from "./AddFacility";
 import Signature from "./Signature";
 import StepTwo from "./add_facility/StepTwo";
-import { useMutate } from "../../../hooks";
 import { notify } from "../../../utils/toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { useMutate } from "../../../hooks/useMutate";
 
 const steps = [
   {

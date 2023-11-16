@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import useFetch from "../../hooks/useFetch"
 import SelectComp from "./Formik/SelectComp"
 
@@ -11,7 +12,6 @@ export default function SelectFacilities({ name,  label }) {
       console.log('e', e)
     }
   })
-  console.log("🚀 ~ file: SelectFacilities.jsx:7 ~ SelectFacilities ~ facilities:", facilities)
 
 
 

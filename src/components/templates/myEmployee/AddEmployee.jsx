@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { LoadingButton } from '@mui/lab'
 import { GridSaveAltIcon } from '@mui/x-data-grid'
 import { Form, Formik } from 'formik'
-import { useMutate } from '../../../hooks/useMutate'
 import { notify } from '../../../utils/toast'
 import EmployeeMainData from './EmployeeMainData'
+import { useMutate } from '../../../hooks/useMutate'
 
 
 export default function AddEmployee({ facultyID , setOpenAddEmployee }) {

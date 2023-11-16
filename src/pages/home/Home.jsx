@@ -20,8 +20,8 @@ import AnalyticsWeeklySales from "../../components/molecules/analytics/Analytics
 import CardStatsVertical from "../../components/molecules/card-stats-vertical/CardStatsVertical";
 import ApexChartWrapper from "../../components/react-apexcharts/ApexChartWrapper";
 import { useUser } from "../../context/user provider/UserContext";
-import { useMutate } from "../../hooks";
 import { notify } from "../../utils/toast";
+import { useMutate } from "../../hooks/useMutate";
 
 const Home = () => {
   const [open, setOpen] = useState(false);

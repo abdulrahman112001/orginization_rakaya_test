@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Form, Formik } from "formik";
-import { useMutate } from "../../../hooks/useMutate";
 import { notify } from "../../../utils/toast";
 import MainHeader from "../../atoms/MainHeader";
 import BaseInputField from "../../molecules/Formik/BaseInputField";
@@ -10,6 +9,7 @@ import SelectCountry from "../../molecules/SelectCountry";
 import SelectOrganizations from "../../molecules/SelectOrganizations";
 import UploadImage from "../../molecules/UploadImage";
 import ButtonComp from "../../atoms/buttons/ButtonComp";
+import { useMutate } from "../../../hooks/useMutate";
 
 export default function AccountSetting({ userData, fetchUserData , setEditUser }) {
   const initialValue = {
