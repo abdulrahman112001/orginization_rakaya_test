@@ -11,7 +11,7 @@ import { useMutate } from "../../hooks/useMutate";
 
 export default function VerifyUser({ userData, dataValue, setOpen }) {
   const [valuesForm, setValuesForm] = useState("");
-  const {  fetchUserData } = useUser();
+  const {  refetch } = useUser();
 
 
 
@@ -23,7 +23,7 @@ export default function VerifyUser({ userData, dataValue, setOpen }) {
     endpoint: `verify`,
     onSuccess: () => {
       notify("success");
-      fetchUserData()
+      refetch()
       setOpen(false);
     },
 

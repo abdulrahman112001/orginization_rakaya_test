@@ -6,7 +6,7 @@ import { useUser } from '../../context/user provider/UserContext'
 
 export default function Profile() {
   const [editUser, setEditUser] = useState(false)
-  const { userData , fetchUserData } = useUser();
+  const { userData , refetch } = useUser();
 
   return (
     <div>
@@ -15,7 +15,7 @@ export default function Profile() {
         open={editUser}
         className={'  '}
         onClose={() => setEditUser(false)}
-        Children={<AccountSetting userData={userData}  fetchUserData={fetchUserData} setEditUser={setEditUser}/>}
+        Children={<AccountSetting userData={userData}  refetch={refetch} setEditUser={setEditUser}/>}
       />
     </div>
   )

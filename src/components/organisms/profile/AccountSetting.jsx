@@ -11,7 +11,7 @@ import UploadImage from "../../molecules/UploadImage";
 import ButtonComp from "../../atoms/buttons/ButtonComp";
 import { useMutate } from "../../../hooks/useMutate";
 
-export default function AccountSetting({ userData, fetchUserData , setEditUser }) {
+export default function AccountSetting({ userData, refetch , setEditUser }) {
   const initialValue = {
     name: userData?.user?.name,
     national_id: userData?.user?.national_id,
@@ -31,6 +31,7 @@ export default function AccountSetting({ userData, fetchUserData , setEditUser }
     onSuccess: () => {
       notify("success", "تم التعديل بنجاح");
       setEditUser(false)
+      refetch()
     },
     onError: (err) => {
       notify("error", err?.response?.data.message);
@@ -99,7 +100,7 @@ export default function AccountSetting({ userData, fetchUserData , setEditUser }
               <SelectOrganizations name={"favourit_organizations"} />
             </div>
             <div>
-              <ButtonComp loading={isLoading} action={()=>fetchUserData}>تعديل</ButtonComp>
+              <ButtonComp loading={isLoading} action={()=>refetch}>تعديل</ButtonComp>
             </div>
           </div>
         </Form>

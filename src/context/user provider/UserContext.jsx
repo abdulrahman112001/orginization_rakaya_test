@@ -1,37 +1,51 @@
+/* eslint-disable no-unused-vars */
 // UserContext.js
 import Cookies from "js-cookie";
 import { createContext, useContext, useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch";
 
 const UserContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const UserProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
   const user_token = Cookies.get("token");
   const authorizationHeader = `Bearer ${user_token}`;
 
   const config = {
     headers: { Authorization: authorizationHeader },
   };
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch(
-        "https://admin.rakaya.co/api/users/info",
-        config
-      );
-      const data = await response.json();
-      setUserData(data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  // const fetchUserData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://admin.rakaya.co/api/users/info",
+  //       config
+  //     );
+  //     const data = await response.json();
+  //     setUserData(data);
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
+  const {
+    data:userData,
+    refetch
+} = useFetch({
+  endpoint: `users/info`,
+  queryKey: ['users_info'],
+
+  onError(e) {
+    console.log('e', e)
+  }
+})
+console.log("🚀 ~ file: UserContext.jsx:32 ~ UserProvider ~ data:", userData)
   // Fetch user data on component mount (you can customize this behavior)
   useEffect(() => {
-    fetchUserData();
+    // fetchUserData();
   }, []);
 
   return (
-    <UserContext.Provider value={{ userData, fetchUserData }}>
+    <UserContext.Provider value={{ userData, refetch }}>
       {children}
     </UserContext.Provider>
   );

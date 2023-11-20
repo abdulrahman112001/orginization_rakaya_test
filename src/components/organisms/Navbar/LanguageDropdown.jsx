@@ -1,27 +1,14 @@
-// ** React Import
+/* eslint-disable react/prop-types */
 import { useEffect } from 'react'
-
-// ** Icon Imports
-
-// ** Third Party Import
 import { useTranslation } from 'react-i18next'
 import IconifyIcon from '../../atoms/icons/IconifyIcon'
 import OptionsMenu from './option-menu/OptionsMenu'
-
-// ** Custom Components Imports
-
 const LanguageDropdown = ({ settings, saveSettings }) => {
-  // ** Hook
   const { i18n } = useTranslation()
-
-  // ** Vars
-  const { layout } = settings
-
   const handleLangItemClick = lang => {
     i18n.changeLanguage(lang)
   }
 
-  // ** Change html `lang` attribute when changing locale
   useEffect(() => {
     document.documentElement.setAttribute('lang', i18n.language)
   }, [i18n.language])
@@ -43,17 +30,17 @@ const LanguageDropdown = ({ settings, saveSettings }) => {
             }
           }
         },
-        {
-          text: 'French',
-          menuItemProps: {
-            sx: { py: 2 },
-            selected: i18n.language === 'fr',
-            onClick: () => {
-              handleLangItemClick('fr')
-              saveSettings({ ...settings, direction: 'ltr' })
-            }
-          }
-        },
+        // {
+        //   text: 'French',
+        //   menuItemProps: {
+        //     sx: { py: 2 },
+        //     selected: i18n.language === 'fr',
+        //     onClick: () => {
+        //       handleLangItemClick('fr')
+        //       saveSettings({ ...settings, direction: 'ltr' })
+        //     }
+        //   }
+        // },
         {
           text: 'Arabic',
           menuItemProps: {

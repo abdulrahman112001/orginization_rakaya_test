@@ -25,6 +25,7 @@ export default function MyFacilities() {
   const [facultyID, setFacultyID] = useState("");
 
   const [detailsItem, setDetailsItem] = useState();
+  const [resetForm , setResetForm] = useState(true)
 
   const {
     data: facilities,
@@ -81,7 +82,13 @@ export default function MyFacilities() {
                         },
                       },
 
-                      { text: "تعديل", onClick: handleEdit },
+                      { text: "تعديل", 
+                       function: () => {
+                        setOpenAddFaculty(true);
+                        setResetForm(false)
+
+                        
+                      }, },
                       { divider: true },
                       {
                         text: "حذف",
@@ -138,7 +145,7 @@ export default function MyFacilities() {
         open={openAddFaculty}
         className={"  "}
         onClose={() => setOpenAddFaculty(false)}
-        Children={<StepperFacility setOpenAddFaculty={setOpenAddFaculty} />}
+        Children={<StepperFacility setOpenAddFaculty={setOpenAddFaculty} resetForm={resetForm} updateData={detailsItem} />}
       />
       <ModalComp
         open={openAddEmployee}

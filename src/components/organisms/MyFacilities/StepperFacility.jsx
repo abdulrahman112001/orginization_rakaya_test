@@ -30,7 +30,8 @@ const steps = [
   },
 ];
 
-const StepperFacility = ({ setOpenAddFaculty }) => {
+const StepperFacility = ({ setOpenAddFaculty , resetForm , updateData }) => {
+  console.log("🚀 ~ file: StepperFacility.jsx:34 ~ StepperFacility ~ updateData:", updateData)
   const [activeStep, setActiveStep] = useState(0);
   // Handle Stepper
   const handleBack = () => {
@@ -60,30 +61,30 @@ const StepperFacility = ({ setOpenAddFaculty }) => {
   });
 
   const initialValues = {
-    name: "",
-    registration_number: "",
-    version_date: "",
-    version_date_hj: "",
-    end_date: "",
-    end_date_hj: "",
-    registration_source: "",
-    license: "",
-    license_expired: "",
-    license_expired_hj: "",
-    address: "",
-    tax_certificate: "",
-    employee_number: "",
-    chefs_number: "",
-    kitchen_space: "",
+    name: !resetForm ? updateData?.name :  "",
+    registration_number: !resetForm ? updateData?.registration_number : "",
+    version_date: !resetForm ? updateData?.version_date :  "",
+    version_date_hj: !resetForm ? updateData?.version_date_hj :  "",
+    end_date:  !resetForm ? updateData?.end_date : "",
+    end_date_hj: !resetForm ? updateData?.end_date_hj : "",
+    registration_source:  !resetForm ? updateData?.registration_source : "",
+    license: !resetForm ? updateData?.license : "",
+    license_expired: !resetForm ? updateData?.license_expired : "",
+    license_expired_hj: !resetForm ? updateData?.license_expired_hj : "",
+    address: !resetForm ? updateData?.address : "",
+    tax_certificate: !resetForm ? updateData?.tax_certificate : "",
+    employee_number:  !resetForm ? updateData?.employee_number : "",
+    chefs_number: !resetForm ? updateData?.chefs_number : "",
+    kitchen_space: !resetForm ? updateData?.kitchen_space : "",
     // registration: "",
     // national_address: "",
-    signature: "",
-    street_name: "",
-    neighborhood: "",
-    city: "",
-    building_number: "",
-    postal_code: "",
-    sub_number: "",
+    signature: !resetForm ? updateData?.signature : "",
+    street_name:  !resetForm ? updateData?.street_name : "",
+    neighborhood:  !resetForm ? updateData?.neighborhood : "",
+    city:  !resetForm ? updateData?.city : "",
+    building_number: !resetForm ? updateData?.building_number : "",
+    postal_code: !resetForm ? updateData?.postal_code : "",
+    sub_number: !resetForm ? updateData?.sub_number : "",
   };
 
   const getStepContent = (step) => {

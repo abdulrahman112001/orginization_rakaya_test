@@ -4,6 +4,7 @@ import SelectCountry from "../../molecules/SelectCountry";
 
 export default function AddFacility() {
   return (
+    
     <div className="">
       {/* <MainHeader title='اضافة منشاه' /> */}
       {/* <Formik onSubmit={values => console.log('values', values)} initialValues={{}}> */}
@@ -160,8 +161,10 @@ export default function AddFacility() {
               name="sub_number "
             />
           </div>
+          
         </div>
       </div>
     </div>
+    
   );
 }

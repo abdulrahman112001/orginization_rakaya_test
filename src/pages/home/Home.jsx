@@ -22,6 +22,7 @@ import ApexChartWrapper from "../../components/react-apexcharts/ApexChartWrapper
 import { useUser } from "../../context/user provider/UserContext";
 import { notify } from "../../utils/toast";
 import { useMutate } from "../../hooks/useMutate";
+import Loading from "../../components/molecules/Loading";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
@@ -40,6 +41,9 @@ const Home = () => {
       notify("error", err?.response?.data.message);
     },
   });
+  if (!userData) {
+    return <p><Loading/></p>; // or any loading indicator you prefer
+  }
 
   return (
     <ApexChartWrapper>
