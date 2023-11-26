@@ -9,6 +9,7 @@ import LayoutAppBar from "../components/organisms/Navbar/appBar/LayoutAppBar";
 import { SideBar } from "../components/organisms/Sidebar/Sidebar";
 import { useAuth } from "../context/auth-and-perm/AuthProvider";
 import { useSettings } from "../hooks/useSettings";
+import Cookies from "js-cookie";
 
 export const Root = ({ props }) => {
   const [openSide, setOpenSide] = useState(false);
@@ -87,10 +88,11 @@ export const Root = ({ props }) => {
       paddingRight: theme.spacing(4),
     },
   }));
+  const token = Cookies.get("token")
 
   // ** Toggle Functions
   const toggleNavVisibility = () => setNavVisible(!navVisible);
-  if (user) {
+  if (token) {
   return (
     <div
       className={
