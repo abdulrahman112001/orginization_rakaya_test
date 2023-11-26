@@ -17,6 +17,8 @@ import StepperWrapper from "../../theme/stepper";
 import AddFacility from "./AddFacility";
 import Signature from "./Signature";
 import StepTwo from "./add_facility/StepTwo";
+import * as Yup from "yup";
+import { t } from "i18next";
 
 const steps = [
   {
@@ -30,22 +32,18 @@ const steps = [
   },
 ];
 
-const StepperFacility = ({ setOpenAddFaculty , resetForm , updateData }) => {
-  console.log("🚀 ~ file: StepperFacility.jsx:34 ~ StepperFacility ~ updateData:", updateData)
+const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
   const [activeStep, setActiveStep] = useState(0);
-  // Handle Stepper
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    // if (activeStep === steps.length - 1) {
-    // }
   };
   const queryClient = useQueryClient();
 
-  const { mutate: addFacility , isLoading:loadingAddFacility } = useMutate({
+  const { mutate: addFacility, isLoading: loadingAddFacility } = useMutate({
     mutationKey: [`add_facilities`],
     endpoint: `facilities`,
     onSuccess: () => {
@@ -61,31 +59,68 @@ const StepperFacility = ({ setOpenAddFaculty , resetForm , updateData }) => {
   });
 
   const initialValues = {
-    name: !resetForm ? updateData?.name :  "",
+    name: !resetForm ? updateData?.name : "",
     registration_number: !resetForm ? updateData?.registration_number : "",
-    version_date: !resetForm ? updateData?.version_date :  "",
-    version_date_hj: !resetForm ? updateData?.version_date_hj :  "",
-    end_date:  !resetForm ? updateData?.end_date : "",
+    version_date: !resetForm ? updateData?.version_date : new Date(),
+    version_date_hj: !resetForm ? updateData?.version_date_hj : "",
+    end_date: !resetForm ? updateData?.end_date : new Date(),
     end_date_hj: !resetForm ? updateData?.end_date_hj : "",
-    registration_source:  !resetForm ? updateData?.registration_source : "",
+    registration_source: !resetForm ? updateData?.registration_source : "",
     license: !resetForm ? updateData?.license : "",
-    license_expired: !resetForm ? updateData?.license_expired : "",
+    license_expired: !resetForm ? updateData?.license_expired : new Date(),
     license_expired_hj: !resetForm ? updateData?.license_expired_hj : "",
     address: !resetForm ? updateData?.address : "",
     tax_certificate: !resetForm ? updateData?.tax_certificate : "",
-    employee_number:  !resetForm ? updateData?.employee_number : "",
+    employee_number: !resetForm ? updateData?.employee_number : "",
     chefs_number: !resetForm ? updateData?.chefs_number : "",
     kitchen_space: !resetForm ? updateData?.kitchen_space : "",
-    // registration: "",
-    // national_address: "",
-    signature: !resetForm ? updateData?.signature : "",
-    street_name:  !resetForm ? updateData?.street_name : "",
-    neighborhood:  !resetForm ? updateData?.neighborhood : "",
-    city:  !resetForm ? updateData?.city : "",
+    street_name: !resetForm ? updateData?.street_name : "",
+    neighborhood: !resetForm ? updateData?.neighborhood : "",
+    city: !resetForm ? updateData?.city : "",
     building_number: !resetForm ? updateData?.building_number : "",
     postal_code: !resetForm ? updateData?.postal_code : "",
     sub_number: !resetForm ? updateData?.sub_number : "",
+    signature: !resetForm ? updateData?.signature : "",
   };
+  const validationSchema = () =>
+    Yup.object({
+      name: Yup.string().trim().required(t("the facility name is required")),
+      registration_number: Yup.string()
+        .trim()
+        .required(t("the registration number required")),
+        version_date: Yup.string()
+        .trim()
+        .required(t("the registration number required")),
+        end_date: Yup.string()
+        .trim()
+        .required(t("the registration number required")),
+        license_expired: Yup.string()
+        .trim()
+        .required(t("the registration number required")),
+      registration_source: Yup.string()
+        .trim()
+        .required(t("the registration source required")),
+      license: Yup.string().trim().required(t("the license number required")),
+      address: Yup.string().trim().required(t("address is  required")),
+      tax_certificate: Yup.string()
+        .trim()
+        .required(t("tax certificate is required")),
+      employee_number: Yup.string()
+        .trim()
+        .required(t("employee number is required")),
+      chefs_number: Yup.string().trim().required(t("chefs number is required")),
+      kitchen_space: Yup.string()
+        .trim()
+        .required(t("kitchen space is required")),
+      street_name: Yup.string().trim().required(t("street name is required")),
+      neighborhood: Yup.string().trim().required(t("neighborhood is required")),
+      city: Yup.string().trim().required(t("city is required")),
+      building_number: Yup.string()
+        .trim()
+        .required(t("building number required")),
+      postal_code: Yup.string().trim().required(t("postal code required")),
+      sub_number: Yup.string().trim().required(t("sub number required")),
+    });
 
   const getStepContent = (step) => {
     switch (step) {
@@ -121,15 +156,14 @@ const StepperFacility = ({ setOpenAddFaculty , resetForm , updateData }) => {
           xs={12}
           sx={{ display: "flex", justifyContent: "end", gap: "5px" }}
           mt={5}
-          className="!sticky !left-0 !bottom-2"
+          className=""
         >
           <ButtonComp
             size="large"
             disabled={activeStep === 0}
-            onClick={handleBack}
+            action={handleBack}
             variant="outlined"
-            
-            className="! w-auto "
+            className="! w-auto !text-contained "
           >
             السابق
           </ButtonComp>
@@ -139,8 +173,7 @@ const StepperFacility = ({ setOpenAddFaculty , resetForm , updateData }) => {
             loading={loadingAddFacility}
             className={"w-auto"}
             variant="contained"
-
-
+            // disabled={activeStep === steps.length - 1 && !isSuccess }
           >
             {activeStep === steps.length - 1 ? "حفظ ومتابعه" : "التالي"}
           </ButtonComp>
@@ -178,8 +211,13 @@ const StepperFacility = ({ setOpenAddFaculty , resetForm , updateData }) => {
         <CardContent>
           <Formik
             initialValues={initialValues}
+            validationSchema={validationSchema}
             onSubmit={(values) => {
-              console.log("value", values);
+              console.log("value", {
+                ...values,
+                "attachments[registration]": values["registration"],
+                "attachments[national_address]": values["national_address"],
+              });
               addFacility({
                 ...values,
                 "attachments[registration]": values["registration"],

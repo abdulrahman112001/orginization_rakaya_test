@@ -9,12 +9,13 @@ const UserContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const UserProvider = ({ children }) => {
   // const [userData, setUserData] = useState(null);
+  // const [user_token , setToken] = useState()
   const user_token = Cookies.get("token");
-  const authorizationHeader = `Bearer ${user_token}`;
+  // const authorizationHeader = `Bearer ${user_token}`;
 
-  const config = {
-    headers: { Authorization: authorizationHeader },
-  };
+  // const config = {
+  //   headers: { Authorization: authorizationHeader },
+  // };
   // const fetchUserData = async () => {
   //   try {
   //     const response = await fetch(
@@ -27,25 +28,23 @@ export const UserProvider = ({ children }) => {
   //     console.error("Error fetching user data:", error);
   //   }
   // };
-  const {
-    data:userData,
-    refetch
-} = useFetch({
-  endpoint: `users/info`,
-  queryKey: ['users_info'],
+  const { data: userData, refetch , isRefetching } = useFetch({
+    endpoint: `users/info`,
+    queryKey: ["users_info"],
 
-  onError(e) {
-    console.log('e', e)
-  }
-})
-console.log("🚀 ~ file: UserContext.jsx:32 ~ UserProvider ~ data:", userData)
+
+    onError(e) {
+      console.log("e", e);
+    },
+    // enabled:user_token ? true : false
+  });
   // Fetch user data on component mount (you can customize this behavior)
   useEffect(() => {
-    // fetchUserData();
-  }, []);
+    // refetch();
+  }, [refetch]);
 
   return (
-    <UserContext.Provider value={{ userData, refetch }}>
+    <UserContext.Provider value={{ userData, refetch , isRefetching   }}>
       {children}
     </UserContext.Provider>
   );

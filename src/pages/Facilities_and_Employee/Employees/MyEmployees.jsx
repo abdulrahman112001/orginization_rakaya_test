@@ -30,6 +30,7 @@ export default function MyEmployees() {
       console.log("e", e);
     },
   });
+  console.log("🚀 ~ file: MyEmployees.jsx:24 ~ MyEmployees ~ employees:", employees)
 
 
   const handleEdit = () => {

@@ -1,7 +1,4 @@
-// ** React Imports
-import { Fragment, useState } from 'react'
-
-// ** MUI Imports
+import { FormControlLabel, Radio } from '@mui/material'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -10,29 +7,18 @@ import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Stepper from '@mui/material/Stepper'
 import Typography from '@mui/material/Typography'
-import success from '../../../../public/images/sucess.svg'
-import warning from '../../../../public/images/worning.svg'
-
-// ** Icon Imports
-
-// ** Custom Components Imports
-// import StepperCustomDot from './StepperCustomDot'
-
-// ** Third Party Imports
-import toast from 'react-hot-toast'
-
-// ** Styled Component
-import { FormControlLabel, Radio } from '@mui/material'
 import { Form, Formik } from 'formik'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { Fragment, useState } from 'react'
+import toast from 'react-hot-toast'
 import StepperWrapper from 'src/@core/styles/mui/stepper'
+import success from '../../../../public/images/sucess.svg'
+import warning from '../../../../public/images/worning.svg'
+import StepperCustomDot from '../../../@core/StepperCustomDot'
 import ModalComp from '../../Modal'
-import StepOne from '../../site/panel/add_facility/StepOne'
-import StepThree from '../../site/panel/add_facility/StepThree'
 import StepTwo from '../../site/panel/add_facility/StepTwo'
 import AddFacility from './AddFacility'
-import StepperCustomDot from '../../../@core/StepperCustomDot'
 import Signature from './Signature'
 
 const steps = [
@@ -48,28 +34,12 @@ const steps = [
 ]
 
 const StepperFacility = () => {
-  // ** States
-  const [email, setEmail] = useState('')
-  const [google, setGoogle] = useState('')
-  const [country, setCountry] = useState('')
-  const [twitter, setTwitter] = useState('')
-  const [username, setUsername] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [facebook, setFacebook] = useState('')
-  const [linkedIn, setLinkedIn] = useState('')
-  const [firstName, setFirstName] = useState('')
+
   const [activeStep, setActiveStep] = useState(0)
-  const [language, setLanguage] = useState([])
   const [open, setOpen] = useState(false)
   const [openSecundModal, setSecundModal] = useState(false)
   const router = useRouter()
 
-  const [state, setState] = useState({
-    password: '',
-    password2: '',
-    showPassword: false,
-    showPassword2: false
-  })
 
   // Handle Stepper
   const handleBack = () => {
@@ -85,18 +55,7 @@ const StepperFacility = () => {
   }
 
   const handleReset = () => {
-    setEmail('')
-    setGoogle('')
-    setCountry('')
-    setTwitter('')
-    setUsername('')
-    setLastName('')
-    setFacebook('')
-    setLinkedIn('')
-    setLanguage([])
-    setFirstName('')
     setActiveStep(0)
-    setState({ ...state, password: '', password2: '' })
   }
 
   const getStepContent = step => {
@@ -126,7 +85,7 @@ const StepperFacility = () => {
 
   const renderContent = () => {
     return (
-      <div container spacing={5}>
+      <div  spacing={5}>
         {getStepContent(activeStep)}
         <Grid
           item

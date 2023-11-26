@@ -13,12 +13,13 @@ export const AuthProvider = ({ children }) => {
   const login = useCallback(
     async (data) => {
       if (setUser) setUser(data);
+      refetch()
       window.localStorage.setItem("user", JSON.stringify(data.user));
       Cookies.set("role", data.user.role_name);
       Cookies.set("token", data.token);
       navigate("/", { replace: true });
     },
-    [navigate, setUser]
+    [navigate, refetch, setUser]
   );
 
   const logout = useCallback(async () => {
@@ -26,6 +27,8 @@ export const AuthProvider = ({ children }) => {
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("token");
     Cookies.remove("role");
+    Cookies.remove("token");
+
     refetch()
     navigate("/login", { replace: true });
   }, [setUser, refetch, navigate]);

@@ -3,15 +3,15 @@
     display: none !important;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 1030px) {
   [dir='rtl'] .css-dip3t8,
   .css-7onajn {
     transform: translateX(100%);
   }
 
-  .collapsed-button-sidebar {
+  /* .collapsed-button-sidebar {
     display: none !important;
-  }
+  } */
 
   [dir='ltr'] .css-dip3t8,
   .css-7onajn {
@@ -52,6 +52,14 @@
 
   .show-hide-pass {
     left: 7% !important;
+  }
+}
+
+@media  (min-width: 1030px) and (max-width:1300px) {
+  .css-qp2vq1{
+    width: 13rem !important;
+    min-width: 13rem !important;
+
   }
 }
 

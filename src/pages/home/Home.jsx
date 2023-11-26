@@ -20,14 +20,13 @@ import AnalyticsWeeklySales from "../../components/molecules/analytics/Analytics
 import CardStatsVertical from "../../components/molecules/card-stats-vertical/CardStatsVertical";
 import ApexChartWrapper from "../../components/react-apexcharts/ApexChartWrapper";
 import { useUser } from "../../context/user provider/UserContext";
-import { notify } from "../../utils/toast";
 import { useMutate } from "../../hooks/useMutate";
-import Loading from "../../components/molecules/Loading";
+import { notify } from "../../utils/toast";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
   const [dataValue, setDataValue] = useState();
-  const { userData } = useUser();
+  const { userData   } = useUser();
   const { mutate: sendOTP } = useMutate({
     mutationKey: [`send-otp`],
     endpoint: `send-otp`,
@@ -41,9 +40,12 @@ const Home = () => {
       notify("error", err?.response?.data.message);
     },
   });
-  if (!userData) {
-    return <p><Loading/></p>; // or any loading indicator you prefer
-  }
+
+
+  // if (isRefetching) {
+  //   return <p><Loading/></p>; // or any loading indicator you prefer
+  // }
+
 
   return (
     <ApexChartWrapper>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -106,12 +107,12 @@ const shortcuts = [
 ]
 
 const AppBarContent = props => {
-  const { hidden, settings, saveSettings, toggleNavVisibility } = props
+  const { hidden, settings, saveSettings, toggleNavVisibility , setSidebarCollapsed } = props
   return (
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <Box className='actions-left' sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
         {/* {hidden && !settings.navHidden ? ( */}
-          <IconButton color='inherit' sx={{ ml: -2.75 }} onClick={toggleNavVisibility}>
+          <IconButton color='inherit' sx={{ ml: -2.75 }} onClick={()=>setSidebarCollapsed(true)}>
             <IconifyIcon icon='mdi:menu' />
           </IconButton>
         {/* ) : null} */}

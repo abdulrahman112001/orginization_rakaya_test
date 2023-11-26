@@ -12,16 +12,21 @@ import DetailsOrder from "../../components/organisms/orders/DetailsOrder";
 import Loading from "../../components/molecules/Loading";
 import DataNotFound from "../../components/molecules/NotFound";
 import useFetch from "../../hooks/useFetch";
+import CancelOrder from "../../components/organisms/orders/CancelOrder";
 
 export default function Orders() {
   const [openAddFaculty, setOpenAddFaculty] = useState(false);
   const [openDetailsOrder, setOpenDetailsOrder] = useState(false);
+  const [openCancelOrder, setOpenCancelOrder] = useState(false);
+  const [orderId, setOrderId] = useState();
+
   const [detailsOrder, setDetailsOrder] = useState("");
 
   const {
     data: Orders,
     isLoading,
     isRefetching,
+    refetch,
   } = useFetch({
     endpoint: `orders`,
     queryKey: ["my_orders"],
@@ -30,6 +35,7 @@ export default function Orders() {
     },
   });
 
+  console.log("🚀 ~ file: Orders.jsx:27 ~ Orders ~ Orders:", Orders);
   return (
     <div>
       <MainHeader
@@ -82,15 +88,38 @@ export default function Orders() {
                       >
                         {item?.status?.name}
                       </Typography>
-                      <Button
-                        variant="outlined"
-                        onClick={() => {
-                          setOpenDetailsOrder(true);
-                          setDetailsOrder(item);
-                        }}
-                      >
-                        تفاصيل طلب
-                      </Button>
+                      <Grid xs={12} sm={12} md={12} xl={12}>
+                        <Button
+                          variant="outlined"
+                          className="mx-2"
+                          onClick={() => {
+                            setOpenDetailsOrder(true);
+                            setDetailsOrder(item);
+                          }}
+                        >
+                          تفاصيل طلب
+                        </Button>
+                        <Button
+                          disabled={
+                            item.status.name == "تم الالغاء" ||
+                            item.status.name == "تم القبول " ||
+                            item.status.name == "تم الرفض"
+                          }
+                          className={`marker:text-white hover:!bg-inherit  ${
+                            item.status.name == "تم الالغاء" ||
+                            item.status.name == "تم القبول " ||
+                            item.status.name == "تم الرفض"
+                              ? "bg-[#bcbcbc] disabled:text-white cursor-not-allowed"
+                              : "bg-red-600 text-white hover:!bg-red-600"
+                          }`}
+                          onClick={() => {
+                            setOpenCancelOrder(true);
+                            setOrderId(item?.id);
+                          }}
+                        >
+                          الغاء طلب
+                        </Button>
+                      </Grid>
                     </Box>
                   </CardContent>
                 </Card>
@@ -113,6 +142,18 @@ export default function Orders() {
         onClose={() => setOpenDetailsOrder(false)}
         Children={
           <DetailsOrder data={detailsOrder} setDetailsOrder={setDetailsOrder} />
+        }
+      />
+      <ModalComp
+        open={openCancelOrder}
+        className={"  "}
+        onClose={() => setOpenCancelOrder(false)}
+        Children={
+          <CancelOrder
+            refetch={refetch}
+            setOpenCancelOrder={setOpenCancelOrder}
+            orderId={orderId}
+          />
         }
       />
     </div>

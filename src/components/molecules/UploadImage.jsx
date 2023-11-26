@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
-import { useDropzone } from "react-dropzone";
+import Box from "@mui/material/Box";
 import { useFormikContext } from "formik";
+import { useState } from "react";
+import { useDropzone } from "react-dropzone";
 import PreviewImage from "./PreviewImage";
-const UploadImage = ({ name, label }) => {
-  const { setFieldValue  , values} = useFormikContext();
-  console.log("🚀 ~ file: UploadImage.jsx:10 ~ UploadImage ~ values:", values)
+const UploadImage = ({ name, label, placeholder }) => {
+  const { setFieldValue, errors } = useFormikContext();
   const [files, setFiles] = useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -17,18 +16,14 @@ const UploadImage = ({ name, label }) => {
     },
     onDrop: (acceptedFiles) => {
       setFiles(acceptedFiles.map((file) => Object.assign(file)));
-      setFieldValue(name, acceptedFiles[0]); // استخدم acceptedFiles بدلاً من files[0]
-      console.log("test",name, files[0])
+      setFieldValue(name, acceptedFiles[0]);
     },
   });
 
   return (
     <>
       <div className="relative my-4 cursor-pointer">
-        <Box
-          {...getRootProps({ className: "dropzone" })}
-          cl
-        >
+        <Box {...getRootProps({ className: "dropzone" })} cl>
           <label> {label} </label>
 
           <input {...getInputProps()} className="cursor-pointer" />
@@ -41,13 +36,20 @@ const UploadImage = ({ name, label }) => {
             }}
           >
             <TextField
+              style={{ cursor: "pointer" }}
               // value={files[0]?.name}
+              error={!!errors[name]}
+              helperText={errors[name]}
               fullWidth
-              placeholder="الرجاء ارفاق صورة الهوية *"
-              className="bg-white rounded-[10px] cursor-pointer"
+              placeholder={placeholder}
+              className={`bg-white rounded-[10px] mt-3 cursor-pointer ${
+                !!errors[name] && "border-red-500 "
+              }`}
             />
           </Box>
-          {/* {img} */}
+          {/* <div>
+            <FormikError name={name} />
+          </div> */}
         </Box>
         <div className="absolute top-[8px] left-[10px] rounded-md">
           <PreviewImage files={files ? files : []} />

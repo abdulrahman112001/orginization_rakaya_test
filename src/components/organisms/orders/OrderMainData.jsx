@@ -16,7 +16,10 @@ export default function OrderMainData({ setShow, show }) {
     },
     enabled: !!values.organization_service_id,
   });
-  console.log("🚀 ~ file: OrderMainData.jsx:19 ~ OrderMainData ~ extra_questions:", extra_questions)
+  console.log(
+    "🚀 ~ file: OrderMainData.jsx:19 ~ OrderMainData ~ extra_questions:",
+    extra_questions
+  );
 
   return (
     <div>
@@ -38,12 +41,27 @@ export default function OrderMainData({ setShow, show }) {
       ) : extra_questions?.questions?.length ? (
         extra_questions?.questions?.map((item) => (
           <ul key={item?.id}>
-            <li className="font-bold">{item?.content} <span className="text-red-500">{item?.is_required == "1" ? "*" : ""}</span> ؟</li>
-            <QuestionBaseInput type={item?.question_type?.name} name={item?.id} idQuestion={item?.id} />
+            {item?.is_visible == "1" && (
+              <>
+                <li className="font-bold">
+                  {item?.content}{" "}
+                  <span className="text-red-500">
+                    {item?.is_required == "1" ? "*" : ""}
+                  </span>{" "}
+                  ؟
+                </li>
+                <QuestionBaseInput
+                  type={item?.question_type?.name}
+                  name={item?.id}
+                  idQuestion={item?.id}
+                  options={item?.options || []}
+                />
+              </>
+            )}
           </ul>
         ))
       ) : (
-        <div className="my-10 text-3xl font-bold text-center"> لايوجد اساله </div>
+        <div className="my-10 text-3xl font-bold text-center">لايوجد اساله</div>
       )}
     </div>
   );

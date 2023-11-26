@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button } from '@mui/material';
 import { useFormikContext } from 'formik';
+import { t } from 'i18next';
 import { useRef, useState } from 'react';
 import SignaturePad from 'react-signature-canvas';
 
@@ -40,10 +41,10 @@ function Signature({name}) {
       </div>
       <div className='flex justify-between my-3'>
         <Button className={''} variant='outlined' onClick={clear}>
-          Clear
+          {t("Clear")}
         </Button>
         <Button className={''} variant='outlined' onClick={trim}>
-          Preview
+          {t("Done")}
         </Button>
       </div>
       <div className='border'>

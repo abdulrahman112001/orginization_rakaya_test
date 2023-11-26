@@ -4,7 +4,6 @@ import SelectCountry from "../../molecules/SelectCountry";
 
 export default function AddFacility() {
   return (
-    
     <div className="">
       {/* <MainHeader title='اضافة منشاه' /> */}
       {/* <Formik onSubmit={values => console.log('values', values)} initialValues={{}}> */}
@@ -53,14 +52,14 @@ export default function AddFacility() {
           </div>
           <div className="w-1/2 col-span-6">
             <BaseInputField
-              label="قم رخصة مزاولة المهنة الصادرة من أمانة العاصمة المقدسة  "
+              label="رقم رخصة مزاولة المهنة الصادرة من أمانة العاصمة المقدسة  "
               placeholder="10********"
               name="license"
             />
           </div>
         </div>
 
-        <div className="flex items-end col-span-12 gap-2 ">
+        <div className="flex items-center col-span-12 gap-2 ">
           <div className="w-1/2">
             <DatePickerComp
               name="license_expired"
@@ -125,7 +124,7 @@ export default function AddFacility() {
             <BaseInputField
               label=" اسم الحي"
               placeholder="حي النقع الشرقي"
-              name="neighborhood "
+              name="neighborhood"
             />
           </div>
         </div>
@@ -135,14 +134,14 @@ export default function AddFacility() {
             <BaseInputField
               label=" اسم المدينة"
               placeholder="بريدة"
-              name="city "
+              name="city"
             />
           </div>
           <div className="w-1/2">
             <BaseInputField
               label="رقم المبنى"
               placeholder="3654"
-              name="building_number "
+              name="building_number"
             />
           </div>
         </div>
@@ -151,20 +150,18 @@ export default function AddFacility() {
             <BaseInputField
               label="الرمز البريدي"
               placeholder="56875"
-              name="postal_code "
+              name="postal_code"
             />
           </div>
           <div className="w-1/2">
             <BaseInputField
               label="الرقم الفرعي"
               placeholder="0541532515"
-              name="sub_number "
+              name="sub_number"
             />
           </div>
-          
         </div>
       </div>
     </div>
-    
   );
 }

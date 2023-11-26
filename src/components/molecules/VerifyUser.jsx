@@ -11,19 +11,14 @@ import { useMutate } from "../../hooks/useMutate";
 
 export default function VerifyUser({ userData, dataValue, setOpen }) {
   const [valuesForm, setValuesForm] = useState("");
-  const {  refetch } = useUser();
+  const { refetch } = useUser();
 
-
-
-  const {
-    mutate: verify_user,
-    isLoading: loadingVerify,
-  } = useMutate({
+  const { mutate: verify_user, isLoading: loadingVerify } = useMutate({
     mutationKey: [`verify_user`],
     endpoint: `verify`,
     onSuccess: () => {
       notify("success");
-      refetch()
+      refetch();
       setOpen(false);
     },
 

@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { Button } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,13 +7,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import MainHeader from "../../../components/atoms/MainHeader";
-import OptionsMenu from "../../../components/organisms/Navbar/option-menu/OptionsMenu";
 import ModalComp from "../../../components/atoms/ModalComp";
-import AddEmployee from "../../../components/templates/myEmployee/AddEmployee";
-import DetailsFacility from "../../../components/organisms/MyFacilities/DetailsFacility";
-import StepperFacility from "../../../components/organisms/MyFacilities/StepperFacility";
 import Loading from "../../../components/molecules/Loading";
 import DataNotFound from "../../../components/molecules/NotFound";
+import DetailsFacility from "../../../components/organisms/MyFacilities/DetailsFacility";
+import StepperFacility from "../../../components/organisms/MyFacilities/StepperFacility";
+import OptionsMenu from "../../../components/organisms/Navbar/option-menu/OptionsMenu";
+import AddEmployee from "../../../components/templates/myEmployee/AddEmployee";
 import useFetch from "../../../hooks/useFetch";
 
 export default function MyFacilities() {
@@ -23,15 +22,14 @@ export default function MyFacilities() {
   const [openAddFaculty, setOpenAddFaculty] = useState(false);
   const [openAddEmployee, setOpenAddEmployee] = useState(false);
   const [facultyID, setFacultyID] = useState("");
-
   const [detailsItem, setDetailsItem] = useState();
-  const [resetForm , setResetForm] = useState(true)
+  const [resetForm, setResetForm] = useState(true);
 
   const {
     data: facilities,
     isLoading,
     isRefetching,
-    refetch
+    refetch,
   } = useFetch({
     endpoint: `facilities`,
     queryKey: ["facilities"],
@@ -82,13 +80,13 @@ export default function MyFacilities() {
                         },
                       },
 
-                      { text: "تعديل", 
-                       function: () => {
-                        setOpenAddFaculty(true);
-                        setResetForm(false)
-
-                        
-                      }, },
+                      {
+                        text: "تعديل",
+                        function: () => {
+                          setOpenAddFaculty(true);
+                          setResetForm(false);
+                        },
+                      },
                       { divider: true },
                       {
                         text: "حذف",
@@ -114,7 +112,10 @@ export default function MyFacilities() {
                         src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/external-company-town-xnimrodx-lineal-xnimrodx-4.png"
                         alt="external-company-town-xnimrodx-lineal-xnimrodx-4"
                       />
-                      <Typography variant="h6" sx={{ fontWeight: 500 , marginTop:1 }}>
+                      <Typography
+                        variant="h6"
+                        sx={{ fontWeight: 500, marginTop: 1 }}
+                      >
                         {item?.name}
                       </Typography>
                       <Button
@@ -145,7 +146,13 @@ export default function MyFacilities() {
         open={openAddFaculty}
         className={"  "}
         onClose={() => setOpenAddFaculty(false)}
-        Children={<StepperFacility setOpenAddFaculty={setOpenAddFaculty} resetForm={resetForm} updateData={detailsItem} />}
+        Children={
+          <StepperFacility
+            setOpenAddFaculty={setOpenAddFaculty}
+            resetForm={resetForm}
+            updateData={detailsItem}
+          />
+        }
       />
       <ModalComp
         open={openAddEmployee}

@@ -17,6 +17,9 @@ import PhoneInput2 from "../molecules/Formik/PhoneInput2";
 import SelectCountry from "../molecules/SelectCountry";
 import UploadImage from "../molecules/UploadImage";
 import { useMutate } from "../../hooks/useMutate";
+import * as Yup from "yup";
+import { t } from "i18next";
+import { useUser } from "../../context/user provider/UserContext";
 
 export default function RegisterForm() {
   const LinkStyled = styled(Link)(({ theme }) => ({
@@ -24,13 +27,16 @@ export default function RegisterForm() {
     color: theme.palette.primary.main,
   }));
   const { login } = useAuth();
+  const { refetch  } = useUser();
 
-  const { mutate: sendRegister , isPending } = useMutate({
+
+  const { mutate: sendRegister, isPending } = useMutate({
     endpoint: `register`,
     mutationKey: [`register`],
     onSuccess: (data) => {
       notify("success");
       login(data.data);
+      refetch()
     },
 
     onError: (err) => {
@@ -38,20 +44,32 @@ export default function RegisterForm() {
       notify("error", err?.response?.data.message);
     },
   });
+  const ValidationSchema = () =>
+    Yup.object({
+      name: Yup.string().trim().required(t("name is required")),
+      national_id: Yup.string().trim().required(t("national is required")),
+      email: Yup.string().trim().required(t("email is required")),
+      birthday: Yup.string().trim().required(t("birthday is required")),
+      password: Yup.string().trim().required(t("birthday is required")),
+      nationality: Yup.string().trim().required(t("birthday is required")),
+      national_id_expired: Yup.string()
+        .trim()
+        .required(t("birthday is required")),
+    });
 
   return (
     <div>
       <Formik
         onSubmit={(values) => {
           console.log("values", { ...values });
-
           sendRegister({ ...values });
         }}
+        ValidationSchema={ValidationSchema}
         initialValues={{
           name: "",
           national_id: "",
           email: "",
-          birthday:  Date(),
+          birthday: Date(),
           password: "",
           nationality: "",
           national_id_expired: Date(),
@@ -108,7 +126,7 @@ export default function RegisterForm() {
               </>
             }
           />
-         <MainButton text={"Sign up"} type={"submit"} loading={isPending} />
+          <MainButton text={"Sign up"} type={"submit"} loading={isPending} />
           <Box
             sx={{
               display: "flex",

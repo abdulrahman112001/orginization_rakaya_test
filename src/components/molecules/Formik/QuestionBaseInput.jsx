@@ -42,6 +42,7 @@ export default function QuestionBaseInput({
 
   ...props
 }) {
+  console.log("🚀 ~ file: QuestionBaseInput.jsx:45 ~ options:", options)
   const { setFieldValue, values, errors } = useFormikContext();
   const [showPassword, setShowPassword] = useState(false);
   const [value, setValue] = useState("female");
@@ -103,17 +104,23 @@ export default function QuestionBaseInput({
         <TextField
           id="outlined-select-currency-native"
           select
-          label="Native select"
+          // label="Native select"
           className="w-full"
           defaultValue="EUR"
+          onChange={(e) => {
+            // if (values[name] !== undefined) {
+            // setFieldValueState(e.target.value)
+            setFieldValue(`answers${name}`, e.target.value);
+            // }
+          }}
           SelectProps={{
             native: true,
           }}
-          helperText="Please select your currency"
+          // helperText="Please select your currency"
         >
           {options?.map((option) => (
             <option key={option.value} value={option.value}>
-              {option.label}
+              {option.content}
             </option>
           ))}
         </TextField>

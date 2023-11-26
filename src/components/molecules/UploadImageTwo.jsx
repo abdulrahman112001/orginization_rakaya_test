@@ -3,28 +3,24 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import { useDropzone } from "react-dropzone";
 import UploadImageIcon from "../atoms/icons/UploadImageIcon";
-import CheckUploadImageIcon from "../atoms/icons/CheckUploadImageIcon";
+import CheckUploadImageIcon from "../../assets/images/check.png";
 import { useFormikContext } from "formik";
 
 const UploadImageTwo = ({ name, label }) => {
   const [files, setFiles] = useState([]);
-  console.log(
-    "🚀 ~ file: UploadImageTwo.jsx:9 ~ UploadImageTwo ~ files:",
-    files
-  );
+  console.log("🚀 ~ file: UploadImageTwo.jsx:11 ~ UploadImageTwo ~ files:", files)
+
   const { setFieldValue } = useFormikContext();
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
-    accept: [
-      "image/*", // يقبل ملفات الصور
-      ".pdf", // يقبل ملفات PDF
-      ".doc", // يقبل ملفات Word
-      ".docx", // يقبل ملفات Word
-    ],
+    accept: ["image/*", ".pdf", ".doc", ".docx"],
     onDrop: (acceptedFiles) => {
       setFiles(acceptedFiles.map((file) => Object.assign(file)));
-      setFieldValue(name, acceptedFiles.map((file) => Object.assign(file)))
+      setFieldValue(
+        name,
+        acceptedFiles.map((file) => Object.assign(file))
+      );
     },
   });
 
@@ -33,10 +29,7 @@ const UploadImageTwo = ({ name, label }) => {
       {...getRootProps({ className: "dropzone  " })}
       sx={files.length ? { height: "" } : {}}
     >
-      <input
-        {...getInputProps()}
-        name={name}
-      />
+      <input {...getInputProps()} name={name} />
       <div className="relative cursor-pointer">
         <div className="flex flex-col items-center gap-5 bg-[#F5F5F5]  rounded-md ">
           <h2 className="bg-[#EFEFEF] w-full text-center p-3 rounded-md">

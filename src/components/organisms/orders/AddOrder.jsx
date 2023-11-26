@@ -63,7 +63,7 @@ export default function AddOrder({setOpenAddFaculty}) {
         <Form>
           <OrderMainData setShow={setShow} show={show} />
           {!show && (
-            <div className="flex justify-center gap-5">
+            <div className="flex justify-center gap-5 mt-10">
               <MainButton text={"رجوع"} action={() => setShow(true)} />
               <MainButton text={"حفظ"} type={"submit"} />
             </div>

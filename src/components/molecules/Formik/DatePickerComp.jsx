@@ -5,11 +5,12 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { useFormikContext } from "formik";
 import { useState, useEffect } from "react";
+import { FormikError } from "./FormikError";
 
 export default function DatePickerComp({ name,name_hj , label }) {
   const { setFieldValue, values } = useFormikContext();
   const [valueGregorian, setValueGregorian] = useState();
-  const [valueHijri, setValueHijri] = useState();
+  const [valueHijri, setValueHijri] = useState('');
 
 
   useEffect(() => {
@@ -34,9 +35,9 @@ export default function DatePickerComp({ name,name_hj , label }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="my-4">
-        <label className="mb-3">{label}</label>
+        <labe>{label}</labe>
         <DatePicker
-          className="bg-white rounded-[10px] w-full"
+          className="bg-white rounded-[10px] w-full mt-3"
           name={name}
           defaultValue={dayjs(values[name])}
           onChange={(newValue) => {
@@ -52,8 +53,9 @@ export default function DatePickerComp({ name,name_hj , label }) {
           }}
         />
         {valueHijri && <p >الموافق بالهجري :  <span className="font-bold">{valueHijri} </span></p>}
+        <div><FormikError name={name} /></div>
 
-        {/* هنا سيتم طباعة التاريخ الهجري */}
+
       </div>
     </LocalizationProvider>
   );

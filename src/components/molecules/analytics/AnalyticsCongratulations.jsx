@@ -1,13 +1,15 @@
+/* eslint-disable react/prop-types */
 // ** MUI Imports
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import { styled, useTheme } from "@mui/material/styles";
-import AvatarCongruity from "../../../assets/cards/illustration-john-dark.png";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+import { t } from "i18next";
 import { Link } from "react-router-dom";
+import AvatarCongruity from "../../../assets/cards/illustration-john-dark.png";
 
 // Styled Grid component
 const StyledGrid = styled(Grid)(({ theme }) => ({
@@ -31,10 +33,6 @@ const Img = styled("img")(({ theme }) => ({
 }));
 
 const AnalyticsCongratulations = ({ userData }) => {
-  // ** Hook
-
-  const theme = useTheme();
-
   return (
     <Card sx={{ position: "relative" }}>
       <CardContent
@@ -43,9 +41,8 @@ const AnalyticsCongratulations = ({ userData }) => {
         <Grid container spacing={6}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h5" sx={{ mb: 4.5 }}>
-              مرحبا بك{" "}
               <Box component="span" sx={{ fontWeight: "bold" }}>
-                {userData?.user?.name}
+                {t("Welcome")} {userData?.user?.name}
               </Box>
               ! 🎉
             </Typography>

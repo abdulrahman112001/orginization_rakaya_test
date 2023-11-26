@@ -25,29 +25,27 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     {/* <LoadingContextProvider> */}
     <LanguageContextProvider>
       <BrowserRouter>
-      <UserProvider>
-
-        <AuthProvider>
-          <SettingsProvider>
-            <SettingsConsumer>
-              {({ settings }) => {
-                return (
-                  <ThemeComponent settings={settings}>
-                    <HelmetProvider>
+        <SettingsProvider>
+          <SettingsConsumer>
+            {({ settings }) => {
+              return (
+                <ThemeComponent settings={settings}>
+                  <HelmetProvider>
+                    <UserProvider>
+                      <AuthProvider>
                         <ProSidebarProvider>
                           <Suspense fallback={<Loading />}>
                             <App />
                           </Suspense>
                         </ProSidebarProvider>
-                    </HelmetProvider>
-                  </ThemeComponent>
-                );
-              }}
-            </SettingsConsumer>
-          </SettingsProvider>
-        </AuthProvider>
-        </UserProvider>
-
+                      </AuthProvider>
+                    </UserProvider>
+                  </HelmetProvider>
+                </ThemeComponent>
+              );
+            }}
+          </SettingsConsumer>
+        </SettingsProvider>
       </BrowserRouter>
     </LanguageContextProvider>
     {/* </LoadingContextProvider> */}

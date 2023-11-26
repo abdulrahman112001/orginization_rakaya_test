@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -5,9 +6,6 @@ import { FaBars } from "react-icons/fa";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/avatars/1.png";
-// import ar from '../../../assets/global/ar.svg';
-// import en from '../../../assets/global/en.svg';
-// import { useAuth } from '../../../context/auth-and-perm/AuthProvider';
 import { useLanguageContext } from "../../../context/language";
 import { useIsRTL } from "../../../hooks";
 import DarkModeIcon from "../../atoms/icons/DarkModeIcon";
@@ -19,7 +17,6 @@ const NavBar = ({
   openSide,
   handleCollapsedSideBar,
   isSidebarCollapsed,
-
   changeStyle,
 }) => {
   console.log(
@@ -27,8 +24,6 @@ const NavBar = ({
     isSidebarCollapsed
   );
   const [dropDown, setDropDown] = useState(false);
-  const [drawerAsideBar, setDrawerAsideBar] = useState(false);
-
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedMode = localStorage.getItem("darkMode");
     return savedMode === "true";
@@ -37,7 +32,6 @@ const NavBar = ({
   const handleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-
     if (newMode) {
       document.body.classList.add("dark");
     } else {

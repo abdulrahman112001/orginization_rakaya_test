@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,10 +19,7 @@ export const SideBar = ({
   handleClickItem,
   handleCollapsedSideBar,
 }) => {
-  console.log(
-    "🚀 ~ file: Sidebar.jsx:21 ~ isSidebarCollapsed:",
-    isSidebarCollapsed
-  );
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -142,8 +141,8 @@ export const SideBar = ({
       rtl={isRTL}
       collapsed={isSidebarCollapsed}
       width="15rem"
-      collapsedWidth="85px"
-      // transitionDuration={250}
+      // collapsedWidth="85px"
+      transitionDuration={250}
       rootStyles={{
         [``]: {
           backgroundColor: "#f7f7f9",
@@ -156,7 +155,7 @@ export const SideBar = ({
         className={`${
           !isSidebarCollapsed
             ? "sm:w-[220px] flex flex-row  justify-between pb-5 "
-            : "w-[70px] flex justify-center  pb-5 "
+            : "md:w-[70px] flex justify-center  pb-5 "
         } `}
       >
           {!isSidebarCollapsed && (

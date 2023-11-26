@@ -97,7 +97,7 @@ export const Root = ({ props }) => {
         isSidebarCollapsed ? "flex w-full" : "grid grid-cols-12 w-full"
       }
     >
-      <div className={isSidebarCollapsed ? "w-[64px]" : "col-span-2  "}>
+      <div className={isSidebarCollapsed ? "w-[64px]" : "lg:col-span-2  "}>
         <OutsideClickHandler onOutsideClick={handleClickOutside}>
           <div className="fixed">
             <SideBar
@@ -110,7 +110,7 @@ export const Root = ({ props }) => {
         {/* {showOverlay && <Overlay zIndex={1100} />} */}
       </div>
 
-      <div className={isSidebarCollapsed ? "w-full" : "col-span-10"}>
+      <div className={isSidebarCollapsed ? "w-full" : "col-span-12 lg:col-span-10"}>
         <VerticalLayoutWrapper className="">
           <MainContentWrapper className="layout-content-wrapper">
             <LayoutAppBar
@@ -119,6 +119,7 @@ export const Root = ({ props }) => {
               appBarContent={
                 <AppBarContent
                   settings={settings}
+                  setSidebarCollapsed={setSidebarCollapsed}
                   saveSettings={saveSettings}
                   // appBarContent={verticalLayoutProps.appBar?.content}
                   {...props}

@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-and-perm/AuthProvider";
 import { useMutate } from "../../hooks/useMutate";
 import ButtonComp from "../atoms/buttons/ButtonComp";
+import * as Yup from "yup";
+import { useUser } from "../../context/user provider/UserContext";
 
 export default function LoginForm() {
   const [rememberMe, setRememberMe] = useState(true);
@@ -17,13 +19,18 @@ export default function LoginForm() {
   const [valuesForm, setValuesForm] = useState("");
   const { login } = useAuth();
   const [dataValue, setDataValue] = useState();
+  const { refetch  } = useUser();
+
   const { mutate: LoginData, isLoading: loadingLogin } = useMutate({
     mutationKey: [`login_data`],
     formData: true,
     endpoint: `login`,
     onSuccess: (data) => {
       login(data.data);
+      // setToken(data?.data)
+      refetch()
       notify("success", `مربحا بك يا ${data?.data?.user.name}`);
+
     },
 
     onError: (err) => {
@@ -46,6 +53,10 @@ export default function LoginForm() {
     },
   });
 
+  const ValidationSchema = () =>
+    Yup.object({
+      phone:  Yup.string().trim().required(t("phone is required"))
+    });
   return (
     <div>
       <Formik
@@ -62,6 +73,7 @@ export default function LoginForm() {
               });
         }}
         initialValues={{ phone: "", phone_code: "", otp: "" }}
+        validationSchema={ValidationSchema}
       >
         <Form>
           {!verifyPhone && (

@@ -48,7 +48,7 @@ const SelectComp = ({ name, data, label, className, placeholder, multi, idValue,
         </FormControl>
       ) : (
         <FormControl className={className}>
-          <InputLabel id='controlled-select-label'>{label}</InputLabel>
+          <InputLabel id='controlled-select-label' >{label}</InputLabel>
           <Select
             value={values[name]}
             label={label}
