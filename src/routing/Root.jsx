@@ -1,21 +1,19 @@
 /* eslint-disable react/prop-types */
 import { Box, styled } from "@mui/material";
-import  { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useNavigate } from "react-router";
 import { Outlet } from "react-router-dom";
 import AppBarContent from "../components/organisms/Navbar/AppBarContent";
 import LayoutAppBar from "../components/organisms/Navbar/appBar/LayoutAppBar";
 import { SideBar } from "../components/organisms/Sidebar/Sidebar";
-import { useAuth } from "../context/auth-and-perm/AuthProvider";
 import { useSettings } from "../hooks/useSettings";
-import Cookies from "js-cookie";
 
 export const Root = ({ props }) => {
   const [openSide, setOpenSide] = useState(false);
   const [, setShowOverlay] = useState(false);
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [changeStyle, setChangeStyle] = useState(false);
