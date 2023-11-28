@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
-import { LoadingButton } from "@mui/lab";
-import { GridSaveAltIcon } from "@mui/x-data-grid";
 import { Form, Formik } from "formik";
 import { t } from "i18next";
 import { useState } from "react";
 import { useUser } from "../../context/user provider/UserContext";
-import { notify } from "../../utils/toast";
-import CheckCode from "../organisms/checkCode";
 import { useMutate } from "../../hooks/useMutate";
+import { notify } from "../../utils/toast";
+import ButtonComp from "../atoms/buttons/ButtonComp";
+import CheckCode from "../organisms/checkCode";
 
 export default function VerifyUser({ userData, dataValue, setOpen }) {
   const [valuesForm, setValuesForm] = useState("");
@@ -46,17 +45,13 @@ export default function VerifyUser({ userData, dataValue, setOpen }) {
         <Form>
           <div className="flex flex-col w-1/2 m-auto text-center gap-y-5">
             <CheckCode number={dataValue?.value} valuesForm={valuesForm} />
-            <LoadingButton
+            <ButtonComp
               loading={!!loadingVerify}
-              loadingPosition="start"
-              fullWidth
-              size="large"
               type="submit"
-              startIcon={<GridSaveAltIcon />}
-              variant="outlined"
+              variant="contained"
             >
               {t("تفعيل")}
-            </LoadingButton>
+            </ButtonComp>
           </div>
         </Form>
       </Formik>

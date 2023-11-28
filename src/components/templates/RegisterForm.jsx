@@ -6,20 +6,21 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { Form, Formik } from "formik";
+import { t } from "i18next";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import { useAuth } from "../../context/auth-and-perm/AuthProvider";
+import { useUser } from "../../context/user provider/UserContext";
+import { useMutate } from "../../hooks/useMutate";
 import { notify } from "../../utils/toast";
+import ButtonComp from "../atoms/buttons/ButtonComp";
 import IconifyIcon from "../atoms/icons/IconifyIcon";
 import BaseInputField from "../molecules/Formik/BaseInputField";
 import DatePickerComp from "../molecules/Formik/DatePickerComp";
-import MainButton from "../molecules/Formik/MainButton";
 import PhoneInput2 from "../molecules/Formik/PhoneInput2";
 import SelectCountry from "../molecules/SelectCountry";
 import UploadImage from "../molecules/UploadImage";
-import { useMutate } from "../../hooks/useMutate";
-import * as Yup from "yup";
-import { t } from "i18next";
-import { useUser } from "../../context/user provider/UserContext";
 
 export default function RegisterForm() {
   const LinkStyled = styled(Link)(({ theme }) => ({
@@ -27,8 +28,8 @@ export default function RegisterForm() {
     color: theme.palette.primary.main,
   }));
   const { login } = useAuth();
-  const { refetch  } = useUser();
-
+  const { refetch } = useUser();
+  const [checked, setChecked] = useState(false);
 
   const { mutate: sendRegister, isPending } = useMutate({
     endpoint: `register`,
@@ -36,7 +37,7 @@ export default function RegisterForm() {
     onSuccess: (data) => {
       notify("success");
       login(data.data);
-      refetch()
+      refetch();
     },
 
     onError: (err) => {
@@ -47,7 +48,9 @@ export default function RegisterForm() {
   const ValidationSchema = () =>
     Yup.object({
       name: Yup.string().trim().required(t("name is required")),
-      national_id: Yup.string().trim().required(t("national is required")),
+      national_id: Yup.string()
+        .matches(/^\d{10}$/, t("The ID number must be exactly 10 digits"))
+        .required("This field is required"),
       email: Yup.string().trim().required(t("email is required")),
       birthday: Yup.string().trim().required(t("birthday is required")),
       password: Yup.string().trim().required(t("birthday is required")),
@@ -64,7 +67,7 @@ export default function RegisterForm() {
           console.log("values", { ...values });
           sendRegister({ ...values });
         }}
-        ValidationSchema={ValidationSchema}
+        validationSchema={ValidationSchema}
         initialValues={{
           name: "",
           national_id: "",
@@ -86,6 +89,7 @@ export default function RegisterForm() {
             label=" رقم الهوية "
             placeholder="10********"
             name="national_id"
+            type="number"
           />
           <PhoneInput2 name="phone" label="رقم الهاتف" />
           <BaseInputField
@@ -96,20 +100,25 @@ export default function RegisterForm() {
           <SelectCountry label={"الدوله"} name={"nationality"} />
           <DatePickerComp name="birthday" label={"تاريخ  الميلاد"} />
 
-          <BaseInputField
+          {/* <BaseInputField
             password
             label="كلمة المرور"
             placeholder="1222"
             name="password"
-          />
-          <UploadImage name="photo" label={"صورة الهوية  "} />
+          /> */}
+          <UploadImage name="photo" label={"صورة  الهوية  الوطنية "} placeholder={t("Upload yor photo")} />
           <DatePickerComp
             name="national_id_expired"
             label={"تاريخ انتهاء الاقامه"}
           />
 
           <FormControlLabel
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+              />
+            }
             sx={{
               mb: 4,
               mt: 1.5,
@@ -126,7 +135,13 @@ export default function RegisterForm() {
               </>
             }
           />
-          <MainButton text={"Sign up"} type={"submit"} loading={isPending} />
+          <ButtonComp
+            type={"submit"}
+            loading={isPending}
+            disabled={!checked}
+          >
+            Sign up
+          </ButtonComp>
           <Box
             sx={{
               display: "flex",

@@ -149,7 +149,7 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
 
   const renderContent = () => {
     return (
-      <div spacing={5}>
+      <div spacing={5} className="flex flex-col justify-between h-full">
         {getStepContent(activeStep)}
         <Grid
           item
@@ -163,7 +163,7 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
             disabled={activeStep === 0}
             action={handleBack}
             variant="outlined"
-            className="! w-auto !text-contained "
+            className={`! w-auto !text-contained ${activeStep === 0 ? "hidden" : "block"} `}
           >
             السابق
           </ButtonComp>
@@ -206,10 +206,11 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
       </StepperWrapper>
       <Card
         sx={{ mt: 4 }}
-        className="!overflow-y-scroll !shadow-none h-[27rem]  scroll_main m-3"
+        className="!overflow-y-scroll scroll_main !shadow-none h-[27rem]  scroll_main m-3"
       >
-        <CardContent>
+        <CardContent className="h-full">
           <Formik
+          
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -225,7 +226,7 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
               });
             }}
           >
-            {() => <Form>{renderContent()}</Form>}
+            {() => <Form className="h-full">{renderContent()}</Form>}
           </Formik>
         </CardContent>
       </Card>

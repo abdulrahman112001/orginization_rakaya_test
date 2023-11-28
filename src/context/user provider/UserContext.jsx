@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
     onError(e) {
       console.log("e", e);
     },
-    // enabled:user_token ? true : false
+    enabled:user_token ? true : false
   });
   // Fetch user data on component mount (you can customize this behavior)
   useEffect(() => {

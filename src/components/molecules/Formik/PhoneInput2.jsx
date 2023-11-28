@@ -35,11 +35,14 @@ const PhoneInput2 = ({ label }) => {
 
         <PhoneInput
           country={"sa"}
+          onlyCountries={['sa']}
           value={values?.phone ? values.phone_code + values.phone : phone}
           onChange={handlePhoneChange}
-          enableSearch
+          // enableSearch
           placeholder="رقم الجوال"
           onBlur={handleBlur}
+          masks={{sa: '.. ... ....', at: '.. ... ....'}}
+
           className={phoneInput({
             error: !!errors.phone,
           })}

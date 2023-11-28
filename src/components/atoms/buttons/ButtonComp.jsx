@@ -26,7 +26,7 @@ const ButtonComp = ({
           : variant == "outlined"
           ? "bg-transparent text-contained hover:!bg-transparent"
           : ""
-      } text-white  hover:!bg-contained`}
+      } text-white  hover:!bg-contained disabled:cursor-not-allowed disabled:text-[#bcbcbc]`}
       sx={{ mb: 7 }}
       disabled={disabled}
       onClick={action}

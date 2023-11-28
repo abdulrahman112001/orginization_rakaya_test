@@ -15,17 +15,16 @@ export default function BaseInputField({
   placeholder,
   name,
   className,
+  type = "text",
   password,
   ...props
 }) {
   const { setFieldValue, values, touched, errors } = useFormikContext();
+
   const [showPassword, setShowPassword] = useState(false);
-  const hasError = touched[name] || Boolean(errors[name]);
-  console.log(
-    "🚀 ~ file: BaseInputField.jsx:24 ~ touched[name]:",
-    touched[name]
-  );
-  console.log("🚀 ~ file: BaseInputField.jsx:25 ~ hasError:", hasError);
+  // const hasError = touched[name] || Boolean(errors[name]);
+  const isError = touched[name] && Boolean(errors[name]);
+  console.log("🚀 ~ file: BaseInputField.jsx:26 ~ isError:", isError)
 
   return (
     <div>
@@ -71,12 +70,14 @@ export default function BaseInputField({
           <TextField
             // autoFocus
             {...props}
-            error={!!errors[name]}
+            error={errors[name]}
             helperText={errors[name]}
             fullWidth
             value={values[name]}
             // sx={{ mb: 4 }}
+            type={type}
             placeholder={placeholder}
+            
             name={name}
             className={`${className} " my-3 " ${
               !!errors[name] && "border-red-500 "

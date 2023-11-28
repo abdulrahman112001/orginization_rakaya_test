@@ -8,8 +8,8 @@ export default function AddFacility() {
       {/* <MainHeader title='اضافة منشاه' /> */}
       {/* <Formik onSubmit={values => console.log('values', values)} initialValues={{}}> */}
       {/* <Form> */}
-      <div className="grid items-center grid-cols-2 gap-2 p-5">
-        <div className="flex items-center col-span-12 gap-2 ">
+      <div className="grid items-start grid-cols-2 gap-2 p-5">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2">
             <BaseInputField
               label=" اسم التجاري للمنشأة بموجب السجل التجاري  "
@@ -25,7 +25,7 @@ export default function AddFacility() {
             />
           </div>
         </div>
-        <div className="flex items-center col-span-12 gap-2 ">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2">
             <DatePickerComp
               name="version_date"
@@ -43,11 +43,12 @@ export default function AddFacility() {
           </div>
         </div>
 
-        <div className="flex items-center col-span-12 gap-2 ">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2 col-span-6">
             <SelectCountry
               label={"مصدر السجل التجاري "}
               name="registration_source"
+              className="mt-[24px]"
             />
           </div>
           <div className="w-1/2 col-span-6">
@@ -59,8 +60,8 @@ export default function AddFacility() {
           </div>
         </div>
 
-        <div className="flex items-center col-span-12 gap-2 ">
-          <div className="w-1/2">
+        <div className="flex items-start col-span-12 gap-2 ">
+          <div className="flex items-start justify-center w-1/2" >
             <DatePickerComp
               name="license_expired"
               name_hj="license_expired_hj"
@@ -70,7 +71,7 @@ export default function AddFacility() {
             />
           </div>
 
-          <div className="w-1/2">
+          <div className="flex items-start justify-center w-1/2 mt-[39px]">
             <BaseInputField
               label="عنوان المنشأة (الحي-الشارع)"
               placeholder="الملك فهد"
@@ -79,8 +80,8 @@ export default function AddFacility() {
           </div>
         </div>
 
-        <div className="flex items-center col-span-12 gap-2 ">
-          <div className="w-1/2">
+        <div className="flex items-start col-span-12 gap-2 ">
+          <div className="w-1/2 mt-[24px]">
             <BaseInputField
               label="شهادة الرقم الضريبي"
               placeholder="***********34"
@@ -96,7 +97,7 @@ export default function AddFacility() {
           </div>
         </div>
 
-        <div className="flex items-center col-span-12 gap-2 ">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2">
             <BaseInputField
               label="عدد الطهاة على راس العمل في المنشاة "
@@ -112,7 +113,7 @@ export default function AddFacility() {
             />
           </div>
         </div>
-        <div className="flex items-center col-span-12 gap-2 ">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2">
             <BaseInputField
               label=" اسم الشارع"
@@ -129,7 +130,7 @@ export default function AddFacility() {
           </div>
         </div>
 
-        <div className="flex items-center col-span-12 gap-2 ">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2">
             <BaseInputField
               label=" اسم المدينة"
@@ -145,7 +146,7 @@ export default function AddFacility() {
             />
           </div>
         </div>
-        <div className="flex items-center col-span-12 gap-2 ">
+        <div className="flex items-start col-span-12 gap-2 ">
           <div className="w-1/2">
             <BaseInputField
               label="الرمز البريدي"

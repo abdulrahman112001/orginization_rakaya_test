@@ -9,7 +9,8 @@ import Login from "../pages/login/Login";
 import Orders from "../pages/orders/Orders";
 import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
-const Home = lazy(() => import('../pages/home/Home'));
+import Landing from "../pages/landing/Landing";
+const Home = lazy(() => import("../pages/home/Home"));
 
 export const AllRoutesProvider = () => {
   return (
@@ -27,6 +28,7 @@ export const AllRoutesProvider = () => {
         path="/login"
         element={<Login title={t("login")} />}
       />
+      <Route path="/landing" element={<Landing title={t("Landing")} />} />
       <Route
         errorElement={<ErrorPage />}
         path="/register"

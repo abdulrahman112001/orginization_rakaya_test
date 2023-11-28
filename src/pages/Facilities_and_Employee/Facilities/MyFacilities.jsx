@@ -107,14 +107,15 @@ export default function MyFacilities() {
                         sx={{ mb: 4, width: 100, height: 100 }}
                       /> */}
                       <img
-                        width="80"
-                        height="80"
+                        width="60"
+                        height="60"
                         src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/external-company-town-xnimrodx-lineal-xnimrodx-4.png"
                         alt="external-company-town-xnimrodx-lineal-xnimrodx-4"
                       />
                       <Typography
                         variant="h6"
                         sx={{ fontWeight: 500, marginTop: 1 }}
+                        className="my-2"
                       >
                         {item?.name}
                       </Typography>
