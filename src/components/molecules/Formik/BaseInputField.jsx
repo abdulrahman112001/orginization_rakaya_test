@@ -23,8 +23,6 @@ export default function BaseInputField({
 
   const [showPassword, setShowPassword] = useState(false);
   // const hasError = touched[name] || Boolean(errors[name]);
-  const isError = touched[name] && Boolean(errors[name]);
-  console.log("🚀 ~ file: BaseInputField.jsx:26 ~ isError:", isError)
 
   return (
     <div>

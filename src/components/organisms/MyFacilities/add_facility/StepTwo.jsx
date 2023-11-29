@@ -11,7 +11,6 @@ export default function StepTwo() {
       console.log('e', e)
     }
   })
-  console.log("🚀 ~ file: StepTwo.jsx:7 ~ StepTwo ~ attachments:", attachments)
 
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">

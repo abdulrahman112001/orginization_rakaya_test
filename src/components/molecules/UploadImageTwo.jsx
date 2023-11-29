@@ -8,13 +8,13 @@ import { useFormikContext } from "formik";
 import PreviewImage from "./PreviewImage";
 
 const UploadImageTwo = ({ name, label }) => {
-  const [files, setFiles] = useState([]);
+  const { setFieldValue , values } = useFormikContext();
+  const [files, setFiles] = useState(values[name]);
   console.log(
     "🚀 ~ file: UploadImageTwo.jsx:11 ~ UploadImageTwo ~ files:",
     files
   );
 
-  const { setFieldValue } = useFormikContext();
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
@@ -27,12 +27,14 @@ const UploadImageTwo = ({ name, label }) => {
       );
     },
   });
+  const isLargeFile = files?.length && files[0].size > 524288000; // 524288000 bytes = 0.5 gigabytes
+
 
   return (
     <div className="relative">
       <Box
         {...getRootProps({ className: "dropzone  " })}
-        sx={files.length ? { height: "" } : {}}
+        sx={files?.length ? { height: "" } : {}}
       >
         <input {...getInputProps()} name={name} />
         <div className="relative cursor-pointer">
@@ -40,7 +42,7 @@ const UploadImageTwo = ({ name, label }) => {
             <h2 className="bg-[#EFEFEF] w-full text-center p-3 rounded-md">
               {label}
             </h2>
-            {!files.length ? (
+            {!files?.length ? (
               <UploadImageIcon />
             ) : (
               <img
@@ -50,8 +52,10 @@ const UploadImageTwo = ({ name, label }) => {
                 alt="check"
               />
             )}
-            <p className="px-1 m-0 text-center">
-              {files.length
+             <p className="p-2 m-0 text-center">
+              {isLargeFile
+                ? "حجم الملف كبير  "
+                : files?.length
                 ? "تم رفع الملف بنجاح"
                 : " اختر ملف أو قم باسقاطه هنا "}
             </p>
@@ -59,8 +63,10 @@ const UploadImageTwo = ({ name, label }) => {
         </div>
       </Box>
       <div className="absolute bottom-[-50px] rounded-md ">
-        
+        {
+          !isLargeFile &&
         <PreviewImage files={files ? files : []} />
+        }
       </div>
     </div>
   );

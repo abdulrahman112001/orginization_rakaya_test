@@ -16,13 +16,9 @@ export default function OrderMainData({ setShow, show }) {
     },
     enabled: !!values.organization_service_id,
   });
-  console.log(
-    "🚀 ~ file: OrderMainData.jsx:19 ~ OrderMainData ~ extra_questions:",
-    extra_questions
-  );
 
   return (
-    <div>
+    <div className="mt-10">
       {show ? (
         <>
           <div className="mb-3">
@@ -34,7 +30,7 @@ export default function OrderMainData({ setShow, show }) {
               name="organization_service_id"
             />
           </div>
-          <div className="mt-10">
+          <div className="flex justify-end mt-10">
             <MainButton text={"متابعه"} action={() => setShow(false)} />
           </div>
         </>

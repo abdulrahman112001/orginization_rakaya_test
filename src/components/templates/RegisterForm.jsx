@@ -53,7 +53,6 @@ export default function RegisterForm() {
         .required("This field is required"),
       email: Yup.string().trim().required(t("email is required")),
       birthday: Yup.string().trim().required(t("birthday is required")),
-      password: Yup.string().trim().required(t("birthday is required")),
       nationality: Yup.string().trim().required(t("birthday is required")),
       national_id_expired: Yup.string()
         .trim()
@@ -73,7 +72,7 @@ export default function RegisterForm() {
           national_id: "",
           email: "",
           birthday: Date(),
-          password: "",
+          // password: "",
           nationality: "",
           national_id_expired: Date(),
           organization_id: "1",
@@ -106,7 +105,11 @@ export default function RegisterForm() {
             placeholder="1222"
             name="password"
           /> */}
-          <UploadImage name="photo" label={"صورة  الهوية  الوطنية "} placeholder={t("Upload yor photo")} />
+          <UploadImage
+            name="photo"
+            label={"صورة  الهوية  الوطنية "}
+            placeholder={t("Upload yor photo")}
+          />
           <DatePickerComp
             name="national_id_expired"
             label={"تاريخ انتهاء الاقامه"}
@@ -135,11 +138,7 @@ export default function RegisterForm() {
               </>
             }
           />
-          <ButtonComp
-            type={"submit"}
-            loading={isPending}
-            disabled={!checked}
-          >
+          <ButtonComp type={"submit"} loading={isPending} disabled={!checked}>
             Sign up
           </ButtonComp>
           <Box

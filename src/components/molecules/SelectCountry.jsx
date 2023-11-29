@@ -32,6 +32,18 @@ export default function SelectCountry({ name, label, className }) {
           options={options}
           name={name}
           onChange={(option) => setFieldValue(name, option.value)}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              padding: "10px",
+
+              borderRadius: " 8px",
+              // borderColor: 'rgba(76, 78, 100, 0.87)',
+            }),
+            option:(baseStyles)=>({
+              ...baseStyles
+            })
+          }}
         />
       </div>
     </div>

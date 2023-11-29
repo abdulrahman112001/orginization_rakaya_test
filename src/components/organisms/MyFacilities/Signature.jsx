@@ -8,9 +8,9 @@ import SignaturePad from "react-signature-canvas";
 import ButtonComp from "../../atoms/buttons/ButtonComp";
 
 function Signature({ name }) {
-  const [trimmedDataURL, setTrimmedDataURL] = useState(null);
+  const { setFieldValue , values } = useFormikContext();
+  const [trimmedDataURL, setTrimmedDataURL] = useState(values[name]);
   const sigPad = useRef(null);
-  const { setFieldValue } = useFormikContext();
 
   const clear = () => {
     sigPad.current.clear();
@@ -22,7 +22,6 @@ function Signature({ name }) {
     const blob = dataURLtoBlob(dataURL);
     const file = new File([blob], "signature.png", { type: "image/png" });
     setFieldValue(name, file);
-    console.log("File:", file);
     setTrimmedDataURL(dataURL);
   };
   const dataURLtoBlob = (dataURL) => {

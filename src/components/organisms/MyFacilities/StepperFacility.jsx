@@ -88,13 +88,13 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
       registration_number: Yup.string()
         .trim()
         .required(t("the registration number required")),
-        version_date: Yup.string()
+      version_date: Yup.string()
         .trim()
         .required(t("the registration number required")),
-        end_date: Yup.string()
+      end_date: Yup.string()
         .trim()
         .required(t("the registration number required")),
-        license_expired: Yup.string()
+      license_expired: Yup.string()
         .trim()
         .required(t("the registration number required")),
       registration_source: Yup.string()
@@ -147,40 +147,40 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
     }
   };
 
-  const renderContent = () => {
-    return (
-      <div spacing={5} className="flex flex-col justify-between h-full">
-        {getStepContent(activeStep)}
-        <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "end", gap: "5px" }}
-          mt={5}
-          className=""
-        >
-          <ButtonComp
-            size="large"
-            disabled={activeStep === 0}
-            action={handleBack}
-            variant="outlined"
-            className={`! w-auto !text-contained ${activeStep === 0 ? "hidden" : "block"} `}
-          >
-            السابق
-          </ButtonComp>
-          <ButtonComp
-            action={handleNext}
-            type={activeStep === steps.length ? "submit" : "button"}
-            loading={loadingAddFacility}
-            className={"w-auto"}
-            variant="contained"
-            // disabled={activeStep === steps.length - 1 && !isSuccess }
-          >
-            {activeStep === steps.length - 1 ? "حفظ ومتابعه" : "التالي"}
-          </ButtonComp>
-        </Grid>
-      </div>
-    );
-  };
+  // const renderContent = () => {
+  //   return (
+  //     <div spacing={5} className="flex flex-col justify-between h-full">
+  //       {getStepContent(activeStep)}
+  //       <Grid
+  //         item
+  //         xs={12}
+  //         sx={{ display: "flex", justifyContent: "end", gap: "5px" }}
+  //         mt={5}
+  //         className=""
+  //       >
+  //         <ButtonComp
+  //           size="large"
+  //           disabled={activeStep === 0}
+  //           action={handleBack}
+  //           variant="outlined"
+  //           className={`! w-auto !text-contained ${activeStep === 0 ? "hidden" : "block"} `}
+  //         >
+  //           السابق
+  //         </ButtonComp>
+  //         <ButtonComp
+  //           action={handleNext}
+  //           type={ "submit" }
+  //           loading={loadingAddFacility}
+  //           className={"w-auto"}
+  //           variant="contained"
+  //           // disabled={activeStep === steps.length - 1 && !isSuccess }
+  //         >
+  //           {activeStep === steps.length - 1 ? "حفظ ومتابعه" : "التالي"}
+  //         </ButtonComp>
+  //       </Grid>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="w-full">
@@ -210,7 +210,6 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
       >
         <CardContent className="h-full">
           <Formik
-          
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -219,14 +218,58 @@ const StepperFacility = ({ setOpenAddFaculty, resetForm, updateData }) => {
                 "attachments[registration]": values["registration"],
                 "attachments[national_address]": values["national_address"],
               });
-              addFacility({
-                ...values,
-                "attachments[registration]": values["registration"],
-                "attachments[national_address]": values["national_address"],
-              });
+              // addFacility({
+              //   ...values,
+              //   "attachments[registration]": values["registration"],
+              //   "attachments[national_address]": values["national_address"],
+              // });
             }}
           >
-            {() => <Form className="h-full">{renderContent()}</Form>}
+            {({ values, errors }) => (
+              <Form className="h-full">
+                <div
+                  spacing={5}
+                  className="flex flex-col justify-between h-full"
+                >
+                  {getStepContent(activeStep)}
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{ display: "flex", justifyContent: "end", gap: "5px" }}
+                    mt={5}
+                    className=""
+                  >
+                    <ButtonComp
+                      size="large"
+                      disabled={activeStep === 0}
+                      action={handleBack}
+                      variant="outlined"
+                      className={`! w-auto !text-contained ${
+                        activeStep === 0 ? "hidden" : "block"
+                      } `}
+                    >
+                      السابق
+                    </ButtonComp>
+                    <ButtonComp
+                      action={
+                        Object.keys(errors).length > 0
+                          ? () => notify("warning", t("please complete field"))
+                          : handleNext
+                      }
+                      type={"submit"}
+                      loading={loadingAddFacility}
+                      className={"w-auto"}
+                      variant="contained"
+                      disabled={values.name == ''}
+                    >
+                      {activeStep === steps.length - 1
+                        ? "حفظ ومتابعه"
+                        : "التالي"}
+                    </ButtonComp>
+                  </Grid>
+                </div>
+              </Form>
+            )}
           </Formik>
         </CardContent>
       </Card>

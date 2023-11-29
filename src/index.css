@@ -477,7 +477,6 @@ main,
 }
 .rtl-13cymwt-control,
 .rtl-t3ipsp-control {
-  padding: 10px;
-  border-radius: 8px;
-  color: rgba(76, 78, 100, 0.87);
+
+  /* color: rgba(76, 78, 100, 0.87); */
 }

@@ -12,7 +12,6 @@ export default function OrganizationServices({ name,  label }) {
       console.log('e', e)
     }
 })
-console.log("🚀 ~ file: OrganizationServices.jsx:7 ~ OrganizationServices ~ Org_services:", Org_services)
   return (
     <div>
       <label>{label}</label>

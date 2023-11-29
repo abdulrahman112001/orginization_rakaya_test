@@ -22,6 +22,7 @@ export default function AddFacility() {
               label=" رقم السجل التجاري  "
               placeholder="10********"
               name="registration_number"
+              type="number"
             />
           </div>
         </div>
@@ -56,6 +57,8 @@ export default function AddFacility() {
               label="رقم رخصة مزاولة المهنة الصادرة من أمانة العاصمة المقدسة  "
               placeholder="10********"
               name="license"
+              type="number"
+
             />
           </div>
         </div>
@@ -86,6 +89,8 @@ export default function AddFacility() {
               label="شهادة الرقم الضريبي"
               placeholder="***********34"
               name="tax_certificate"
+              type="number"
+
             />
           </div>
           <div className="w-1/2">
@@ -93,6 +98,8 @@ export default function AddFacility() {
               label="عدد الموظفين بموجب بيانات التامينات الاجتماعية "
               placeholder="20"
               name="employee_number"
+              type="number"
+
             />
           </div>
         </div>
@@ -103,6 +110,8 @@ export default function AddFacility() {
               label="عدد الطهاة على راس العمل في المنشاة "
               placeholder="4"
               name="chefs_number"
+              type="number"
+
             />
           </div>
           <div className="w-1/2">
@@ -110,6 +119,8 @@ export default function AddFacility() {
               label=" مساحة المطبخ ( بالمتر المربع)"
               placeholder="500"
               name="kitchen_space"
+              type="number"
+
             />
           </div>
         </div>
@@ -143,6 +154,8 @@ export default function AddFacility() {
               label="رقم المبنى"
               placeholder="3654"
               name="building_number"
+              type="number"
+
             />
           </div>
         </div>
@@ -152,6 +165,8 @@ export default function AddFacility() {
               label="الرمز البريدي"
               placeholder="56875"
               name="postal_code"
+              type="number"
+
             />
           </div>
           <div className="w-1/2">
@@ -159,6 +174,8 @@ export default function AddFacility() {
               label="الرقم الفرعي"
               placeholder="0541532515"
               name="sub_number"
+              type="number"
+
             />
           </div>
         </div>
